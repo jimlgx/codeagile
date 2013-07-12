@@ -21,7 +21,54 @@ import java.util.List;
  */
 public class DomainModel extends AbstractModel {
 
-
+	/**
+	 * long serialVersionUID :
+	 * 
+	 * @since 2013-7-11 wangjunming
+	 */
+	private static final long serialVersionUID = 2170681849291764804L;
+	/**
+	 * List<ModelField> fields :
+	 * 
+	 * @since 2013-7-11 wangjunming
+	 */
 	private List<ModelField> fields;
+
+	/**
+	 * String primaryKey :主键标志
+	 * 
+	 * @since 2013-7-11 wangjunming
+	 */
+	private String primaryKey;
+
+	/**
+	 * @return the primaryKey
+	 */
+	public String getPrimaryKey() {
+		return primaryKey;
+	}
+
+	/**
+	 * @param primaryKey
+	 *            the primaryKey to set
+	 */
+	public void setPrimaryKey(String primaryKey) {
+		this.primaryKey = primaryKey;
+	}
+
+	/**
+	 * @return the fields
+	 */
+	public List<ModelField> getFields() {
+		return fields;
+	}
+
+	/**
+	 * @param fields
+	 *            the fields to set
+	 */
+	public void setFields(List<ModelField> fields) {
+		this.fields = fields;
+	}
 
 }

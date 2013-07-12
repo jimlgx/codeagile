@@ -19,4 +19,11 @@ package org.jimlgx.codeagile.generate.model;
  */
 public class MavenModule extends MavenProject {
 
+	/** 
+	 * long serialVersionUID :       
+	 * @since  2013-7-11 wangjunming
+	 */
+	private static final long serialVersionUID = -611759642951309378L;
+
+	
 }

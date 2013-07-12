@@ -54,21 +54,6 @@ public class MavenProject extends AbstractModel implements Project {
 	private String packaging = "jar";
 
 	/**
-	 * The full name of the project.
-	 */
-	private String name;
-
-	/**
-	 * A detailed description of the project, used by Maven whenever it needs to
-	 * describe the project, such as on the web site. While this element can be
-	 * specified as CDATA to enable the use of HTML tags within the description,
-	 * it is discouraged to allow plain text representation. If you need to
-	 * modify the index page of the generated web site, you are able to specify
-	 * your own instead of adjusting this text.
-	 */
-	private String description;
-
-	/**
 	 * Declares to which version of project descriptor this POM conforms.
 	 */
 	private String modelVersion;
@@ -180,36 +165,6 @@ public class MavenProject extends AbstractModel implements Project {
 	 */
 	public void setPackaging(String packaging) {
 		this.packaging = packaging;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description
-	 *            the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	/**

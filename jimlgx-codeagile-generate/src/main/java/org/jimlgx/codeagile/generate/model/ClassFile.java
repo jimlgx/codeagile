@@ -19,4 +19,10 @@ package org.jimlgx.codeagile.generate.model;
  */
 public class ClassFile extends FileModel {
 
+	/** 
+	 * long serialVersionUID :       
+	 * @since  2013-7-11 wangjunming
+	 */
+	private static final long serialVersionUID = -7180125336061987400L;
+
 }

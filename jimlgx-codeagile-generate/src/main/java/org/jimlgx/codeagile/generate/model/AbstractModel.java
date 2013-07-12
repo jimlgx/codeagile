@@ -10,6 +10,9 @@ package org.jimlgx.codeagile.generate.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  * <code>AbstractModel</code>
  * 
@@ -39,11 +42,39 @@ public class AbstractModel implements Serializable {
 	 */
 	private String uniqueSign;
 	/**
+	 * String code :代码标志
+	 * 
+	 * @since 2013-7-11 wangjunming
+	 */
+	private String code;
+
+	/**
 	 * String description :描述
 	 * 
 	 * @since 2013-4-14 wangjunming
 	 */
 	private String description;
+	/**
+	 * String comment :注释
+	 * 
+	 * @since 2013-7-11 wangjunming
+	 */
+	private String comment;
+
+	/**
+	 * @return the comment
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * @param comment
+	 *            the comment to set
+	 */
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
 	/**
 	 * @return the name
@@ -90,4 +121,31 @@ public class AbstractModel implements Serializable {
 		this.description = description;
 	}
 
+	/**
+	 * @return the code
+	 */
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * @param code
+	 *            the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	/**
+	 * <code>toString</code>
+	 * 
+	 * @return
+	 * @since 2013-7-11 wangjunming
+	 */
+	@Override
+	public String toString() {
+
+		return ToStringBuilder.reflectionToString(this,
+				ToStringStyle.MULTI_LINE_STYLE);
+	}
 }

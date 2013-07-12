@@ -19,4 +19,11 @@ package org.jimlgx.codeagile.generate.model;
  */
 public class Folder extends AbstractModel {
 
+	/**
+	 * long serialVersionUID :
+	 * 
+	 * @since 2013-7-11 wangjunming
+	 */
+	private static final long serialVersionUID = -6733067602012379748L;
+
 }
