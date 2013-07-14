@@ -8,7 +8,12 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import java.io.File;
+import java.util.List;
+
 import org.apache.maven.model.Parent;
+import org.jimlgx.codeagile.generate.util.GenerateUtils;
+import org.springframework.util.CollectionUtils;
 
 /**
  * <code>MavenProject</code>
@@ -21,7 +26,7 @@ import org.apache.maven.model.Parent;
  * @author wangjunming
  * @since 1.0 2013-4-11
  */
-public class MavenProject extends AbstractModel implements Project {
+public class MavenProject extends Folder implements Project {
 	/**
 	 * long serialVersionUID :
 	 * 
@@ -76,6 +81,40 @@ public class MavenProject extends AbstractModel implements Project {
 	 * 
 	 */
 	private String groupId;
+	/**
+	 * SourceFolder sourceFolders :源码目录
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private List<SourceFolder> sourceFolders;
+
+	/**
+	 * List<Package> packages :
+	 * 
+	 * 包结构
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private List<Package> packages;
+
+	/**
+	 * List<MavenModule> modules :
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private List<MavenModule> modules;
+	/**
+	 * List<Folder> folders : 文件夹
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private List<Folder> folders;
+	/**
+	 * List<FileModel> fileModels : 文件对象
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private List<FileModel> fileModels;
 
 	/**
 	 * @return the modelVersion
@@ -168,13 +207,139 @@ public class MavenProject extends AbstractModel implements Project {
 	}
 
 	/**
+	 * @return the packages
+	 */
+	public List<Package> getPackages() {
+		return packages;
+	}
+
+	/**
+	 * @param packages
+	 *            the packages to set
+	 */
+	public void setPackages(List<Package> packages) {
+		this.packages = packages;
+	}
+
+	/**
+	 * @return the modules
+	 */
+	public List<MavenModule> getModules() {
+		return modules;
+	}
+
+	/**
+	 * @param modules
+	 *            the modules to set
+	 */
+	public void setModules(List<MavenModule> modules) {
+		this.modules = modules;
+	}
+
+	/**
+	 * @return the sourceFolder
+	 */
+	public List<SourceFolder> getSourceFolders() {
+		return sourceFolders;
+	}
+
+	/**
+	 * @param sourceFolders
+	 *            the sourceFolders to set
+	 */
+	public void setSourceFolder(List<SourceFolder> sourceFolders) {
+		this.sourceFolders = sourceFolders;
+	}
+
+	/**
+	 * @return the folders
+	 */
+	public List<Folder> getFolders() {
+		return folders;
+	}
+
+	/**
+	 * @param folders
+	 *            the folders to set
+	 */
+	public void setFolders(List<Folder> folders) {
+		this.folders = folders;
+	}
+
+	/**
+	 * @return the fileModels
+	 */
+	public List<FileModel> getFileModels() {
+		return fileModels;
+	}
+
+	/**
+	 * @param fileModels
+	 *            the fileModels to set
+	 */
+	public void setFileModels(List<FileModel> fileModels) {
+		this.fileModels = fileModels;
+	}
+
+	/**
+	 * @param sourceFolders
+	 *            the sourceFolders to set
+	 */
+	public void setSourceFolders(List<SourceFolder> sourceFolders) {
+		this.sourceFolders = sourceFolders;
+	}
+
+	// public void generate(File file) {
+	// setParentFile(file);
+	// generate();
+	// }
+
+	/**
 	 * <code>generate</code>
 	 * 
 	 * @since 2013-4-11 wangjunming
 	 */
 	public void generate() {
-		// TODO Auto-generated method stub
-		logger.debug("{} generate", this);
+		logger.debug("{} generate", this.getArtifactId());
+		
+		generateFolder();
+		// this.getf
+
+		if (!CollectionUtils.isEmpty(fileModels)) {
+			for (FileModel fileModel : fileModels) {
+				fileModel.generate();
+			}
+		} else {
+			logger.debug("MavenProject:{} fileModels is empty",
+					this.getArtifactId());
+		}
 	}
 
+	/**
+	 * <code>generateFolder</code>
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	@Override
+	public void generateFolder() {
+		GenerateUtils.createFile(new File(getBaseDir(), this.getArtifactId()));
+
+		if (!CollectionUtils.isEmpty(sourceFolders)) {
+			for (SourceFolder sourceFolder : sourceFolders) {
+				sourceFolder.generate();
+			}
+		} else {
+			logger.debug("MavenProject:{} sourceFolders is empty",
+					this.getArtifactId());
+		}
+
+		if (!CollectionUtils.isEmpty(folders)) {
+			for (Folder folder : folders) {
+				folder.generate();
+			}
+		} else {
+			logger.debug("MavenProject:{} folders is empty",
+					this.getArtifactId());
+		}
+	}
 }

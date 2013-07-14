@@ -8,6 +8,8 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import java.util.List;
+
 /**
  * <code>PackageFolder</code>
  * 
@@ -25,6 +27,52 @@ public class PackageFolder extends Folder implements Package {
 	private static final long serialVersionUID = 777515909524858649L;
 
 	/**
+	 * SourceFolder sourceFolder :源码目录
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private SourceFolder sourceFolder;
+	/**
+	 * List<JavaFile> javaFiles :类文件
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private List<JavaFile> javaFiles;
+
+	/**
+	 * <code>getJavaFiles</code>
+	 * 
+	 * @return
+	 * @since 2013-7-14 wangjunming
+	 */
+	public List<JavaFile> getJavaFiles() {
+		return this.javaFiles;
+	}
+
+	/**
+	 * @return the sourceFolder
+	 */
+	public SourceFolder getSourceFolder() {
+		return sourceFolder;
+	}
+
+	/**
+	 * @param sourceFolder
+	 *            the sourceFolder to set
+	 */
+	public void setSourceFolder(SourceFolder sourceFolder) {
+		this.sourceFolder = sourceFolder;
+	}
+
+	/**
+	 * @param javaFiles
+	 *            the javaFiles to set
+	 */
+	public void setJavaFiles(List<JavaFile> javaFiles) {
+		this.javaFiles = javaFiles;
+	}
+
+	/**
 	 * <code>generate</code>
 	 * 
 	 * @since 2013-4-11 wangjunming
@@ -32,5 +80,9 @@ public class PackageFolder extends Folder implements Package {
 	public void generate() {
 		// TODO Auto-generated method stub
 		logger.debug("{} generate", this);
+		for (JavaFile javaFile : javaFiles) {
+			javaFile.generate();
+		}
 	}
+
 }

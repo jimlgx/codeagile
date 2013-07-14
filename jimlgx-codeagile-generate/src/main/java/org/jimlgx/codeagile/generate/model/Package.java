@@ -8,6 +8,8 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import java.util.List;
+
 /**
  * <code>Package</code>
  * 
@@ -16,5 +18,24 @@ package org.jimlgx.codeagile.generate.model;
  * @since 1.0 2013-4-14
  */
 public interface Package {
+
+	/**
+	 * <code>getName</code>
+	 * 
+	 * 
+	 * 获得包名
+	 * 
+	 * @return
+	 * @since 2013-7-14 wangjunming
+	 */
+	public String getName();
+
+	/**
+	 * <code>getJavaFiles</code>
+	 * 
+	 * @return
+	 * @since 2013-7-14 wangjunming
+	 */
+	public List<JavaFile> getJavaFiles();
 
 }

@@ -14,6 +14,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 
 /**
  * <code>AbstractModel</code>
@@ -128,6 +129,7 @@ public class AbstractModel implements Serializable {
 	 * @return the code
 	 */
 	public String getCode() {
+		Assert.notNull(code, "code not null");
 		return code;
 	}
 
@@ -136,6 +138,7 @@ public class AbstractModel implements Serializable {
 	 *            the code to set
 	 */
 	public void setCode(String code) {
+		Assert.notNull(code, "code not null");
 		this.code = code;
 	}
 

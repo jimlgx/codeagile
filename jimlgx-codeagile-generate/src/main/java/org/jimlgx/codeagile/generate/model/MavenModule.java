@@ -19,11 +19,32 @@ package org.jimlgx.codeagile.generate.model;
  */
 public class MavenModule extends MavenProject {
 
-	/** 
-	 * long serialVersionUID :       
-	 * @since  2013-7-11 wangjunming
+	/**
+	 * long serialVersionUID :
+	 * 
+	 * @since 2013-7-11 wangjunming
 	 */
 	private static final long serialVersionUID = -611759642951309378L;
 
-	
+	/**
+	 * MavenModule parent :父结构
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private MavenModule parentModule;
+
+	/**
+	 * @return the parentModule
+	 */
+	public MavenModule getParentModule() {
+		return parentModule;
+	}
+
+	/**
+	 * @param parentModule
+	 *            the parentModule to set
+	 */
+	public void setParentModule(MavenModule parentModule) {
+		this.parentModule = parentModule;
+	}
 }
