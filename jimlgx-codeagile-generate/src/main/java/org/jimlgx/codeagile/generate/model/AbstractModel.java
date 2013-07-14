@@ -12,6 +12,8 @@ import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <code>AbstractModel</code>
@@ -28,6 +30,7 @@ public class AbstractModel implements Serializable {
 	 * @since 2013-4-11 wangjunming
 	 */
 	private static final long serialVersionUID = -6529236160284596075L;
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * String name : 名称

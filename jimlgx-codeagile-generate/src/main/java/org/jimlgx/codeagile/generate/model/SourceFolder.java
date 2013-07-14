@@ -19,4 +19,10 @@ package org.jimlgx.codeagile.generate.model;
  */
 public class SourceFolder extends Folder {
 
+	/** 
+	 * long serialVersionUID :       
+	 * @since  2013-7-14 wangjunming
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

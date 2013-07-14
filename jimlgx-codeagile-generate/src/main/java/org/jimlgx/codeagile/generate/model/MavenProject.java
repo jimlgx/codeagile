@@ -174,7 +174,7 @@ public class MavenProject extends AbstractModel implements Project {
 	 */
 	public void generate() {
 		// TODO Auto-generated method stub
-
+		logger.debug("{} generate", this);
 	}
 
 }

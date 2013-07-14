@@ -24,4 +24,13 @@ public class PackageFolder extends Folder implements Package {
 	 */
 	private static final long serialVersionUID = 777515909524858649L;
 
+	/**
+	 * <code>generate</code>
+	 * 
+	 * @since 2013-4-11 wangjunming
+	 */
+	public void generate() {
+		// TODO Auto-generated method stub
+		logger.debug("{} generate", this);
+	}
 }

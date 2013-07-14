@@ -8,6 +8,8 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import org.jimlgx.codeagile.generate.Generate;
+
 /**
  * <code>Folder</code>
  * 
@@ -17,7 +19,7 @@ package org.jimlgx.codeagile.generate.model;
  * @author wangjunming
  * @since 1.0 2013-4-14
  */
-public class Folder extends AbstractModel {
+public class Folder extends AbstractModel implements Generate {
 
 	/**
 	 * long serialVersionUID :
@@ -26,4 +28,13 @@ public class Folder extends AbstractModel {
 	 */
 	private static final long serialVersionUID = -6733067602012379748L;
 
+	/**
+	 * <code>generate</code>
+	 * 
+	 * @since 2013-4-11 wangjunming
+	 */
+	public void generate() {
+		// TODO Auto-generated method stub
+		logger.debug("{} generate", this);
+	}
 }
