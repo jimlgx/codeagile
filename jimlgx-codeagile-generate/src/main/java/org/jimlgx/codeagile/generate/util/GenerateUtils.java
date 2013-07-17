@@ -66,12 +66,12 @@ public class GenerateUtils {
 	}
 
 	/**
-	 * <code>getBaseDir</code> 获得默认的工作空间
+	 * <code>getUserDir</code> 获得默认的工作空间
 	 * 
 	 * @return 工作空间目录 如："D:\WORKSPACE\Eclipse\"
 	 * @since 2013-7-14 wangjunming
 	 */
-	public static String getBaseDir() {
+	public static String getUserDir() {
 
 		return (new File(System.getProperty("user.dir"))).getParentFile()
 				.getAbsolutePath() + "\\";
@@ -98,26 +98,26 @@ public class GenerateUtils {
 	}
 
 	/**
-	 * <code>buildBaseDir</code>
+	 * <code>buildBasedir</code>
 	 * 
-	 * 构建绝对的 baseDir路径
+	 * 构建绝对的 basedir路径
 	 * 
-	 * @param baseDir
+	 * @param basedir
 	 * @return
 	 * @since 2013-7-14 wangjunming
 	 */
-	public static String buildBaseDir(String baseDir) {
+	public static String buildBasedir(String basedir) {
 		String filePath = null;
-		if (isAbsoluteFile(baseDir)) {
-			filePath = baseDir;
+		if (isAbsoluteFile(basedir)) {
+			filePath = basedir;
 		} else {
-			
-			filePath = getBaseDir() + baseDir;
+
+			filePath = getUserDir() + basedir;
 		}
 
 		if (StringUtils.endsWith(filePath, "\\")
 				|| StringUtils.endsWith(filePath, "/")) {
-			logger.debug("baseDir = {}", baseDir);
+			logger.debug("basedir = {}", basedir);
 
 		} else {
 			filePath = filePath + "\\";

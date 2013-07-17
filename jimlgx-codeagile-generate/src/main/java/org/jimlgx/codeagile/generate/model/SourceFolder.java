@@ -8,6 +8,9 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <code>SourceFolder</code>
  * 
@@ -19,10 +22,49 @@ package org.jimlgx.codeagile.generate.model;
  */
 public class SourceFolder extends Folder {
 
-	/** 
-	 * long serialVersionUID :       
-	 * @since  2013-7-14 wangjunming
+	/**
+	 * long serialVersionUID :
+	 * 
+	 * @since 2013-7-14 wangjunming
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public SourceFolder() {
+	}
+
+	/**
+	 * @param code
+	 */
+	public SourceFolder(String code) {
+		this.setCode(code);
+	}
+
+	/**
+	 * @param code
+	 * @param basedir
+	 */
+	public SourceFolder(String code, String basedir) {
+		this.setCode(code);
+		this.setBasedir(basedir);
+	}
+
+	/**
+	 * <code>mavenSourceFolder</code>
+	 * 
+	 * 默认的mavne源码包结构
+	 * 
+	 * @return
+	 * @since 2013-7-17 wangjunming
+	 */
+	public static List<SourceFolder> mavenSourceFolder(String basedir) {
+
+		List<SourceFolder> list = new ArrayList<SourceFolder>();
+
+		list.add(new SourceFolder("src/main/java", basedir));
+		list.add(new SourceFolder("src/main/resources", basedir));
+		list.add(new SourceFolder("src/test/java", basedir));
+		list.add(new SourceFolder("src/test/resources", basedir));
+
+		return list;
+	}
 }
