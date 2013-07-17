@@ -26,15 +26,15 @@ public class GenerateUtilsTest {
 	@Test
 	public void test1() {
 
-		String text = GenerateUtils.getBaseDir();
+		String text = GenerateUtils.getUserDir();
 		logger.debug("text = {}", text);
-		text = GenerateUtils.buildBaseDir("test");
+		text = GenerateUtils.buildBasedir("test");
 		logger.debug("text = {}", text);
-		text = GenerateUtils.buildBaseDir("D:\\test");
+		text = GenerateUtils.buildBasedir("D:\\test");
 		logger.debug("text = {}", text);
-		
-		text = GenerateUtils.buildBaseDir("classpath:test");
-		
+
+		text = GenerateUtils.buildBasedir("classpath:test");
+
 		logger.debug("text = {}", text);
 	}
 }

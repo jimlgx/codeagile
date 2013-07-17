@@ -240,6 +240,14 @@ public class MavenProject extends Folder implements Project {
 	 * @return the sourceFolder
 	 */
 	public List<SourceFolder> getSourceFolders() {
+//
+//		if (CollectionUtils.isEmpty(sourceFolders)) {
+//
+//			this.sourceFolders = SourceFolder.mavenSourceFolder(this
+//					.getBasedir() + this.getCode());
+//
+//		}
+
 		return sourceFolders;
 	}
 
@@ -301,12 +309,12 @@ public class MavenProject extends Folder implements Project {
 	 */
 	public void generate() {
 		logger.debug("{} generate", this.getArtifactId());
-		
+
 		generateFolder();
 		// this.getf
 
-		if (!CollectionUtils.isEmpty(fileModels)) {
-			for (FileModel fileModel : fileModels) {
+		if (!CollectionUtils.isEmpty(getFileModels())) {
+			for (FileModel fileModel : getFileModels()) {
 				fileModel.generate();
 			}
 		} else {
@@ -322,10 +330,10 @@ public class MavenProject extends Folder implements Project {
 	 */
 	@Override
 	public void generateFolder() {
-		GenerateUtils.createFile(new File(getBaseDir(), this.getArtifactId()));
+		GenerateUtils.createFile(new File(getBasedir(), this.getArtifactId()));
 
-		if (!CollectionUtils.isEmpty(sourceFolders)) {
-			for (SourceFolder sourceFolder : sourceFolders) {
+		if (!CollectionUtils.isEmpty(this.getSourceFolders())) {
+			for (SourceFolder sourceFolder : this.getSourceFolders()) {
 				sourceFolder.generate();
 			}
 		} else {
@@ -333,8 +341,8 @@ public class MavenProject extends Folder implements Project {
 					this.getArtifactId());
 		}
 
-		if (!CollectionUtils.isEmpty(folders)) {
-			for (Folder folder : folders) {
+		if (!CollectionUtils.isEmpty(this.getFolders())) {
+			for (Folder folder : this.getFolders()) {
 				folder.generate();
 			}
 		} else {
@@ -342,4 +350,14 @@ public class MavenProject extends Folder implements Project {
 					this.getArtifactId());
 		}
 	}
+
+	// /**
+	// * <code>defaultFloder</code>
+	// *
+	// * @since 2013-7-17 wangjunming
+	// */
+	// public void defaultFloder() {
+	// // TODO Auto-generated method stub
+	//
+	// }
 }

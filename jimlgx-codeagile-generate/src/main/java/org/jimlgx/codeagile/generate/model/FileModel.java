@@ -8,7 +8,10 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import java.io.File;
+
 import org.jimlgx.codeagile.generate.Generate;
+import org.jimlgx.codeagile.generate.util.GenerateUtils;
 
 /**
  * <code>FileModel</code>
@@ -29,6 +32,20 @@ public class FileModel extends Folder implements Generate {
 	private static final long serialVersionUID = -7200333743290920517L;
 
 	/**
+	 * 
+	 */
+	public FileModel() {
+		super();
+	}
+
+	/**
+	 * @param code
+	 */
+	public FileModel(String code) {
+		super(code);
+	}
+
+	/**
 	 * <code>generate</code>
 	 * 
 	 * @since 2013-4-11 wangjunming
@@ -36,6 +53,7 @@ public class FileModel extends Folder implements Generate {
 	public void generate() {
 		// TODO Auto-generated method stub
 		logger.debug("{} generate", this);
+		GenerateUtils.createFile(new File(this.getBasedir(), this.getCode()));
 		// this.getFile().c
 	}
 }

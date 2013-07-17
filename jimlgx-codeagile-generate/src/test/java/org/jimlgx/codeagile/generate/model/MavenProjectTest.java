@@ -8,6 +8,9 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jimlgx.codeagile.generate.util.GenerateUtils;
 import org.junit.Test;
 
@@ -30,8 +33,20 @@ public class MavenProjectTest {
 
 		MavenProject project = new MavenProject();
 
-		project.setBaseDir(GenerateUtils.getBaseDir());
+		project.setBasedir(GenerateUtils.getUserDir());
+
 		project.setArtifactId("jimlgx-codeagile-demo");
+		project.setCode(project.getArtifactId());
+
+		List<SourceFolder> sourceFolders = SourceFolder
+				.mavenSourceFolder(project.getBasedir() + project.getCode());
+
+		project.setSourceFolder(sourceFolders);
+		
+		List<FileModel> fileModels = new ArrayList<FileModel>();
+		
+		project.setFileModels(fileModels);
+		// project.defaultFloder();
 		project.generate();
 
 	}
