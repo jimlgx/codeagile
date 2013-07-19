@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy-MM-dd HH:mm:ss,SSS}[%t][%x][%-5p]%m method:%l%n" />
+		</layout>
+	</appender>
+	<appender name="DRFD" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/logs/log4j/debug.log" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy-MM-dd HH:mm:ss,SSS}[%t][%x][%-5p]%m method:%l%n" />
+		</layout>
+	</appender>
+
+	<appender name="DRFI" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/logs/log4j/info.log" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy-MM-dd HH:mm:ss,SSS}[%t][%x][%-5p]%m method:%l%nn" />
+		</layout>
+	</appender>
+
+	<appender name="DRFW" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/logs/log4j/warn.log" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy-MM-dd HH:mm:ss,SSS}[%t][%x][%-5p]%m method:%l%n" />
+		</layout>
+	</appender>
+
+	<appender name="DRFE" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/logs/log4j/error.log" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="MaxBackupIndex" value="7" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy-MM-dd HH:mm:ss,SSS}[%t][%x][%-5p]%m method:%l%n" />
+		</layout>
+	</appender>
+
+	<logger name="java.sql">
+		<!-- <level value="WARN" /> -->
+	</logger>
+	<logger name="org.springframework">
+		<!-- <level value="WARN" /> -->
+	</logger>
+	<logger name="org.apache.ibatis.logging.jdbc">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	<root>
+		<!-- <priority value="INFO" /> -->
+		<priority value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="DRFD" />
+		<appender-ref ref="DRFI" />
+		<appender-ref ref="DRFW" />
+		<appender-ref ref="DRFE" />
+	</root>
+
+</log4j:configuration>
