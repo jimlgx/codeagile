@@ -13,6 +13,8 @@ import java.util.List;
 
 import org.jimlgx.codeagile.generate.util.GenerateUtils;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <code>MavenProjectTest</code>
@@ -22,6 +24,7 @@ import org.junit.Test;
  * @since 1.0 2013-7-14
  */
 public class MavenProjectTest {
+protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * <code>testGenerate</code>

@@ -18,9 +18,10 @@ import java.util.List;
  * @since 1.0 2013-7-14
  */
 public class JavaFile extends FileModel {
-	/** 
-	 * long serialVersionUID :       
-	 * @since  2013-7-14 wangjunming
+	/**
+	 * long serialVersionUID :
+	 * 
+	 * @since 2013-7-14 wangjunming
 	 */
 	private static final long serialVersionUID = 2602095103265813886L;
 
@@ -37,6 +38,28 @@ public class JavaFile extends FileModel {
 	 * @since 2013-7-14 wangjunming
 	 */
 	private String extendsClass;
+	/**
+	 * String modifier : 修饰符
+	 * 
+	 * @since 2013-7-19 wangjunming
+	 */
+	private String modifier;
+
+	/**
+	 * @return the modifier
+	 */
+	public String getModifier() {
+		return modifier;
+	}
+
+	/**
+	 * @param modifier
+	 *            the modifier to set
+	 */
+	public void setModifier(String modifier) {
+		this.modifier = modifier;
+	}
+
 	/**
 	 * List<String> implClass : 实现的接口
 	 * 
