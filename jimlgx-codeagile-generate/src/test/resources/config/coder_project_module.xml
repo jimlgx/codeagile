@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 代码生成器对应 xml -->
+<projects>
+	<project name="代码生成器测试工程" value="zrtech-demo-coder" groupId="com.zrtech.showcase"
+		artifactId="">
+		<modules>
+			<module name="测试模块" value="codertest">
+				<models>
+					<model name="用户信息模型" value="UserBean">
+						<field name="名称" value="name" type="String" />
+						<field name="地址" value="address" type="String" />
+						<field name="年龄" value="age" type="Integer" />
+						<field name="描述" value="description" type="String" />
+						<field name="备注" value="note" type="String" />
+					</model>
+				</models>
+			</module>
+		</modules>
+	</project>
+</projects>
