@@ -240,13 +240,13 @@ public class MavenProject extends Folder implements Project {
 	 * @return the sourceFolder
 	 */
 	public List<SourceFolder> getSourceFolders() {
-//
-//		if (CollectionUtils.isEmpty(sourceFolders)) {
-//
-//			this.sourceFolders = SourceFolder.mavenSourceFolder(this
-//					.getBasedir() + this.getCode());
-//
-//		}
+		//
+		// if (CollectionUtils.isEmpty(sourceFolders)) {
+		//
+		// this.sourceFolders = SourceFolder.mavenSourceFolder(this
+		// .getBasedir() + this.getCode());
+		//
+		// }
 
 		return sourceFolders;
 	}
@@ -282,6 +282,9 @@ public class MavenProject extends Folder implements Project {
 	 */
 	public void setFileModels(List<FileModel> fileModels) {
 		this.fileModels = fileModels;
+		for (FileModel fileModel : fileModels) {
+			fileModel.setBasedir(this.getPath());
+		}
 	}
 
 	/**
@@ -302,7 +305,7 @@ public class MavenProject extends Folder implements Project {
 	 * @since 2013-4-11 wangjunming
 	 */
 	public void generate() {
- 
+
 		logger.debug("generate artifactId : {} ", this.getArtifactId());
 
 		generateFolder();
@@ -325,7 +328,7 @@ public class MavenProject extends Folder implements Project {
 	 */
 	@Override
 	public void generateFolder() {
- 
+
 		GenerateUtils.createFileDirectory(new File(getPath()));
 
 		if (!CollectionUtils.isEmpty(this.getSourceFolders())) {
@@ -346,5 +349,5 @@ public class MavenProject extends Folder implements Project {
 			logger.debug("empty folders artifactId :{}", this.getArtifactId());
 		}
 	}
- 
+
 }

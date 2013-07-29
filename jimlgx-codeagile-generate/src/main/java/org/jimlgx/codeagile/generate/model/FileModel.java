@@ -9,6 +9,7 @@
 package org.jimlgx.codeagile.generate.model;
 
 import java.io.File;
+import java.util.List;
 
 import org.jimlgx.codeagile.generate.Generate;
 import org.jimlgx.codeagile.generate.util.GenerateUtils;
@@ -55,5 +56,17 @@ public class FileModel extends Folder implements Generate {
 		logger.debug("{} generate", this);
 		GenerateUtils.createFileDirectory(new File(this.getBasedir(), this.getCode()));
 		// this.getFile().c
+	}
+
+	/**
+	 * <code>mavneFile</code>
+	 *
+	 * @param path
+	 * @return
+	 * @since   2013-7-29    wangjunming
+	 */
+	public static List<FileModel> mavneFile(String path) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
