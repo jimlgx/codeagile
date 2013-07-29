@@ -8,6 +8,20 @@
  */
 package org.jimlgx.codeagile.parse.xml;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.jimlgx.codeagile.generate.model.DomainModel;
+import org.jimlgx.codeagile.generate.model.MavenProject;
+import org.jimlgx.codeagile.parse.ParseUtils;
+import org.jimlgx.codeagile.parse.ProjectParse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +40,31 @@ import org.jimlgx.codeagile.parse.ProjectParse;
  * @author wangjunming
  * @since 1.0 2013-7-23
  */
+
 public class XmlProjectParse extends AbstractParse implements ProjectParse {
+	protected Logger logger = LoggerFactory.getLogger(getClass());
+
+	private Document document;
 
 	/**
 	 * 
 	 */
+
+	public XmlProjectParse(File file) {
+		super();
+		SAXReader sr = new SAXReader();
+		try {
+			document = sr.read(file);
+		} catch (DocumentException e) {
+			throw new IllegalArgumentException("the " + file.getPath()
+					+ " not pdm file", e);
+		}
+	}
+
+	/**
+	 * 
+	 */
+
 	public XmlProjectParse() {
 		super();
 	}
@@ -49,6 +83,7 @@ public class XmlProjectParse extends AbstractParse implements ProjectParse {
 	 * @since 2013-7-23 wangjunming
 	 */
 	public List<MavenProject> parse() {
+
 		if (getElement() != null) {
 
 			@SuppressWarnings("unchecked")
@@ -98,5 +133,4 @@ public class XmlProjectParse extends AbstractParse implements ProjectParse {
 		}
 		return project;
 	}
-
 }
