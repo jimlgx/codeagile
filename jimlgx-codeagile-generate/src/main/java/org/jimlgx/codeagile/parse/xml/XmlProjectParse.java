@@ -111,6 +111,7 @@ public class XmlProjectParse extends AbstractParse implements ProjectParse {
 	private MavenProject parseProject(Element projectElement) {
 		MavenProject project = new MavenProject();
 
+ 
 		ParseUtils.parseAttributeValue(projectElement, project, "name",
 				"artifactId", "groupId", "code", "basedir", "version");
 

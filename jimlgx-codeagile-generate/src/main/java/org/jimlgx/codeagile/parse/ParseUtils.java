@@ -11,7 +11,7 @@ package org.jimlgx.codeagile.parse;
 import java.io.File;
 import java.lang.reflect.Method;
 
-import org.codehaus.plexus.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -42,8 +42,10 @@ public class ParseUtils {
 	 * @param strings
 	 * @since 2013-7-23 wangjunming
 	 */
+ 
 	public static void parseAttributeValue(Element element, Object modle,
 			String... strings) {
+ 
 		Assert.notNull(element);
 		Assert.notNull(modle);
 		for (String attributeName : strings) {
@@ -51,6 +53,7 @@ public class ParseUtils {
 			if (StringUtils.isNotBlank(value)) {
 				try {
 					String setter = PropertyUtils.parseSetter(attributeName);
+ 
 					logger.debug("setter = {}", setter);
 
 					Method method = findMethod(modle, setter, value.getClass());
@@ -69,6 +72,7 @@ public class ParseUtils {
 		}
 
 	}
+ 
 
 	/**
 	 * <code>findMethod</code>
@@ -105,5 +109,5 @@ public class ParseUtils {
 		}
 	}
 
-	// public static Element
+ 
 }

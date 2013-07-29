@@ -8,10 +8,14 @@
  */
 package org.jimlgx.codeagile.parse.xml;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.jimlgx.codeagile.generate.model.DomainModel;
 import org.jimlgx.codeagile.generate.model.ModelField;
 import org.jimlgx.codeagile.parse.DomainParse;
@@ -27,6 +31,22 @@ import org.slf4j.LoggerFactory;
  */
 public class XmlDomainParse extends AbstractParse implements DomainParse {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
+
+	private Document document;
+
+	/**
+	 * 
+	 */
+	public XmlDomainParse(File file) {
+		super();
+		SAXReader sr = new SAXReader();
+		try {
+			document = sr.read(file);
+		} catch (DocumentException e) {
+			throw new IllegalArgumentException("the " + file.getPath()
+					+ " not pdm file", e);
+		}
+	}
 
 	/**
 	 * 
@@ -112,6 +132,7 @@ public class XmlDomainParse extends AbstractParse implements DomainParse {
 	 * @return
 	 * @since 2013-7-22 wangjunming
 	 */
+
 	protected ModelField parseField(Element fieldElement) {
 		ModelField field = new ModelField();
 		String name = fieldElement.attributeValue("name");

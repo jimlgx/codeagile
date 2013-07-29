@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 代码生成器对应 xml -->
+<projects>
+	<project name="任务模型管理" groupId="org.jimlgx.base" artifactId="jimlgx-base-task"
+		code="task" workspace="jimlgx-codeagile/base/">
+		<modules>
+			<module name="任务管理" code="task" type="xml" pdm="">
+				<models>
+					<model name="任务分类" code="TaskCatalog" description="模型分类，可以定义不同的任务类型：如：栏目定时发布">
+
+						<field name="任务类" code="targetBeanName" type="String"
+							description="执行任务的实体类" />
+
+						<field name="任务方法" code="targetMethod" type="String"
+							description="执行任务的实体类需要执行的方法" />
+
+					</model>
+
+
+					<model name="任务对象" code="TaskTopic" description="任务主题对象">
+
+						<field name="执行参数" code="arguments" type="String"
+							description="参数定义为字符串类型的多参数可以由 ；，切割为String 数组" />
+
+						<field name="cron表达式" code="cronExpression" type="String"
+							description="设定执行任务时间的表达式" />
+
+						<field name="开始时间" code="startTime" type="java.util.Date"
+							description="任务启动开始时间" />
+						<field name="结束时间" code="endTime" type="java.util.Date"
+							description="任务结束时间" />
+
+						<field name="执行状态" code="executeState" type="Integer"
+							description="0:停止，1：启动，2：暂停，3：过期" />
+
+					</model>
+
+					<!-- 常用 corn 表达式字典 -->
+				</models>
+			</module>
+		</modules>
+	</project>
+</projects>

@@ -7,7 +7,7 @@
  * @time  2013-7-17
  */
 package org.jimlgx.codeagile.generate;
-
+ 
 import java.io.File;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.dom4j.Document;
 import org.jimlgx.codeagile.generate.model.MavenProject;
 import org.jimlgx.codeagile.parse.ParseUtils;
 import org.jimlgx.codeagile.parse.xml.XmlProjectParse;
-
+ 
 /**
  * <code>Bootstrap</code>
  * 
@@ -24,7 +24,7 @@ import org.jimlgx.codeagile.parse.xml.XmlProjectParse;
  * @since 1.0 2013-7-17
  */
 public class Bootstrap {
-
+ 
 	// /**
 	// * <code>main</code>
 	// *

@@ -87,6 +87,21 @@ public class Folder extends AbstractModel implements Generate {
 		return getBasedir() + this.getCode();
 	}
 
+	// /**
+	// * @return the file
+	// */
+	// public File getFile() {
+	// return file;
+	// }
+	//
+	// /**
+	// * @param file
+	// * the file to set
+	// */
+	// public void setFile(File file) {
+	// this.file = file;
+	// }
+
 	/**
 	 * <code>generateFolder</code>
 	 * 
