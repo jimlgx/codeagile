@@ -12,8 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.dom4j.DocumentException;
-import org.jimlgx.codeagile.generate.model.MavenProject;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.jimlgx.codeagile.generate.model.MavenProject;

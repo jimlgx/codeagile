@@ -16,22 +16,14 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.jimlgx.codeagile.generate.model.DomainModel;
-import org.jimlgx.codeagile.generate.model.MavenProject;
-import org.jimlgx.codeagile.parse.ParseUtils;
-import org.jimlgx.codeagile.parse.ProjectParse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.dom4j.Element;
 import org.jimlgx.codeagile.generate.model.Folder;
 import org.jimlgx.codeagile.generate.model.MavenModule;
 import org.jimlgx.codeagile.generate.model.MavenProject;
 import org.jimlgx.codeagile.generate.model.SourceFolder;
 import org.jimlgx.codeagile.parse.ParseUtils;
 import org.jimlgx.codeagile.parse.ProjectParse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <code>XmlProjectParse</code>

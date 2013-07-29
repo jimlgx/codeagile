@@ -10,7 +10,6 @@ package org.jimlgx.codeagile.generate.util;
 
 import java.io.File;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
