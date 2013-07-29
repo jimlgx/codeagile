@@ -9,6 +9,8 @@
 package org.jimlgx.codeagile.generate.model;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jimlgx.codeagile.generate.Generate;
@@ -32,13 +34,6 @@ public class Folder extends AbstractModel implements Generate {
 	 * @since 2013-7-11 wangjunming
 	 */
 	private static final long serialVersionUID = -6733067602012379748L;
-
-	// /**
-	// * File file :文件对象
-	// *
-	// * @since 2013-7-14 wangjunming
-	// */
-	// private File file;
 
 	/**
 	 * String Basedir :当前目录 ${basedir}
@@ -67,9 +62,7 @@ public class Folder extends AbstractModel implements Generate {
 	 */
 	public String getBasedir() {
 		Assert.notNull(basedir, "please set dasedir");
-		if (!basedir.endsWith("/")) {
-			this.basedir = this.basedir + "/";
-		}
+		this.basedir = GenerateUtils.buildBasedir(basedir);
 		return basedir;
 	}
 
@@ -82,20 +75,17 @@ public class Folder extends AbstractModel implements Generate {
 		this.basedir = basedir;
 	}
 
-	// /**
-	// * @return the file
-	// */
-	// public File getFile() {
-	// return file;
-	// }
-	//
-	// /**
-	// * @param file
-	// * the file to set
-	// */
-	// public void setFile(File file) {
-	// this.file = file;
-	// }
+	/**
+	 * <code>getPath</code>
+	 * 
+	 * 获得该目录路径 ${basedir}${code}
+	 * 
+	 * @return
+	 * @since 2013-7-29 wangjunming
+	 */
+	public String getPath() {
+		return getBasedir() + this.getCode();
+	}
 
 	/**
 	 * <code>generateFolder</code>
@@ -106,7 +96,7 @@ public class Folder extends AbstractModel implements Generate {
 	 */
 	public void generateFolder() {
 
-		GenerateUtils.createFile(new File(getBasedir(), this.getCode()));
+		GenerateUtils.createFileDirectory(new File(getPath()));
 
 	}
 
@@ -116,8 +106,24 @@ public class Folder extends AbstractModel implements Generate {
 	 * @since 2013-4-11 wangjunming
 	 */
 	public void generate() {
-		// TODO Auto-generated method stub
-		logger.debug("{} generate", this);
+		logger.debug("generate {} ", this.getPath());
 		generateFolder();
+	}
+
+	/**
+	 * <code>docFolder</code>
+	 * 
+	 * 默认文档结构
+	 * 
+	 * @return
+	 * @since 2013-7-29 wangjunming
+	 */
+	public static List<Folder> docFolder() {
+		List<Folder> folders = new ArrayList<Folder>();
+		folders.add(new Folder("doc"));
+		folders.add(new Folder("doc\\db"));
+		folders.add(new Folder("doc\\temp"));
+
+		return folders;
 	}
 }

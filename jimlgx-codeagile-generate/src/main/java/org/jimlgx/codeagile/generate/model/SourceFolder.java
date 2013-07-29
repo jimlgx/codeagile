@@ -49,14 +49,14 @@ public class SourceFolder extends Folder {
 	}
 
 	/**
-	 * <code>mavenSourceFolder</code>
+	 * <code>mavenSourceFolders</code>
 	 * 
 	 * 默认的mavne源码包结构
 	 * 
 	 * @return
 	 * @since 2013-7-17 wangjunming
 	 */
-	public static List<SourceFolder> mavenSourceFolder(String basedir) {
+	public static List<SourceFolder> mavenSourceFolders(String basedir) {
 
 		List<SourceFolder> list = new ArrayList<SourceFolder>();
 

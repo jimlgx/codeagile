@@ -42,11 +42,11 @@ public class XmlDomainParseTest {
 	public void testparseDomains() throws IOException, DocumentException {
 
 		String filePath = "src/test/resources/data/xml/coder_project_module.xml";
-		File file = new File(filePath);
-		parse = new XmlDomainParse(file);
-
-		List<DomainModel> domains = parse.parseDomains();
-
-		logger.info("domains = {}", domains);
+//		File file = new File(filePath);
+//		parse = new XmlDomainParse(file);
+//
+//		List<DomainModel> domains = parse.parseDomains();
+//
+//		logger.info("domains = {}", domains);
 	}
 }

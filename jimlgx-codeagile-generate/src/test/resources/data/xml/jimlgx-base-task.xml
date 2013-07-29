@@ -2,9 +2,13 @@
 <!-- 代码生成器对应 xml -->
 <projects>
 	<project name="任务模型管理" groupId="org.jimlgx.base" artifactId="jimlgx-base-task"
-		code="task" workspace="jimlgx-codeagile/base/">
+		code="task" basedir="base/">
 		<modules>
-			<module name="任务管理" code="task" type="xml" pdm="">
+			<module name="任务管理" code="task" parseType="xml">
+				<pdm file="" description="pdm文件解析模型">
+				</pdm>
+				<dbconfig description="数据库反向解析模型">
+				</dbconfig>
 				<models>
 					<model name="任务分类" code="TaskCatalog" description="模型分类，可以定义不同的任务类型：如：栏目定时发布">
 

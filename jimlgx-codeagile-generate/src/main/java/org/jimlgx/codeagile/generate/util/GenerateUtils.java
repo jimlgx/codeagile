@@ -26,42 +26,63 @@ import org.springframework.util.ResourceUtils;
  */
 public class GenerateUtils {
 	public static final String PROJECT_HOME = System.getProperty("user.dir");
+
 	protected static Logger logger = LoggerFactory
 			.getLogger(GenerateUtils.class);
 
 	/**
-	 * <code>createFile</code> 创建文件或路径
+	 * <code>createFileDirectory</code> 创建文件夹路径
 	 * 
 	 * @param file
 	 *            File
 	 * @since 2013-7-14 wangjunming
 	 */
-	public static void createFile(File file) {
+	public static void createFileDirectory(File file) {
+
 		if (file == null) {
 			logger.info("the File is null");
 			return;
 		}
 		boolean exists = file.exists();
 		if (exists) {
-			logger.info("exists File :\"{}\" ignore it", file.getPath());
+			logger.info("exists File :\"{}\" ignore it", file.getAbsolutePath());
 		} else {
-			if (file.isFile()) {
-				File parent = file.getParentFile();
-				if (!parent.exists()) {
-					// parent.mkdirs();
-					createFile(parent);
-				}
-				try {
-					file.createNewFile();
-				} catch (IOException e) {
-					// e.printStackTrace();
-					System.out.println(e.getMessage());
-					logger.warn(e.getMessage(), e);
-				}
-			} else {
-				file.mkdirs();
+			file.mkdirs();
+			logger.info("create File :\"{}\"", file.getAbsolutePath());
+		}
+	}
+
+	/**
+	 * <code>createNewFile</code>
+	 * 
+	 * 创建新的文件
+	 * 
+	 * 该方法不常用，文件一般使用模板创建 例如：freemarker
+	 * 
+	 * @param file
+	 * @since 2013-7-29 wangjunming
+	 */
+	public static void createNewFile(File file) {
+
+		if (file == null) {
+			logger.info("the File is null");
+			return;
+		}
+		boolean exists = file.exists();
+		if (exists) {
+			logger.info("exists File :\"{}\" ignore it", file.getAbsolutePath());
+		} else {
+
+			File parent = file.getParentFile();
+			if (!parent.exists()) {
+				createFileDirectory(parent);
 			}
-			logger.info("create File :\"{}\"", file.getPath());
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				logger.warn(e.getMessage(), e);
+			}
+			logger.info("create File :\"{}\"", file.getAbsolutePath());
 		}
 	}
 

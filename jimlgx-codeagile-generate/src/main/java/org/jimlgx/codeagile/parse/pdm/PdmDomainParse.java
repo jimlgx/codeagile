@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * @author wangjunming
  * @since 1.0 2013-7-11
  */
-public class PdmDomainParse implements DomainParse {
+public class PdmDomainParse  implements DomainParse {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	private Document document;
@@ -56,7 +56,7 @@ public class PdmDomainParse implements DomainParse {
 	 * @return
 	 * @since 2013-7-11 wangjunming
 	 */
-	public List<DomainModel> parseDomains() {
+	public List<DomainModel> parse() {
 		if (document != null) {
 
 			@SuppressWarnings("unchecked")

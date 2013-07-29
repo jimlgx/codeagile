@@ -8,14 +8,10 @@
  */
 package org.jimlgx.codeagile.parse.xml;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 import org.jimlgx.codeagile.generate.model.DomainModel;
 import org.jimlgx.codeagile.generate.model.ModelField;
 import org.jimlgx.codeagile.parse.DomainParse;
@@ -29,24 +25,8 @@ import org.slf4j.LoggerFactory;
  * @author wangjunming
  * @since 1.0 2013-7-19
  */
-public class XmlDomainParse implements DomainParse {
+public class XmlDomainParse extends AbstractParse implements DomainParse {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
-
-	private Document document;
-
-	/**
-	 * 
-	 */
-	public XmlDomainParse(File file) {
-		super();
-		SAXReader sr = new SAXReader();
-		try {
-			document = sr.read(file);
-		} catch (DocumentException e) {
-			throw new IllegalArgumentException("the " + file.getPath()
-					+ " not pdm file", e);
-		}
-	}
 
 	/**
 	 * 
@@ -56,16 +36,23 @@ public class XmlDomainParse implements DomainParse {
 	}
 
 	/**
-	 * <code>parseDomains</code>
+	 * @param element
+	 */
+	public XmlDomainParse(Element element) {
+		super(element);
+	}
+
+	/**
+	 * <code>parse</code>
 	 * 
 	 * @return
 	 * @since 2013-7-19 wangjunming
 	 */
-	public List<DomainModel> parseDomains() {
-		if (document != null) {
+	public List<DomainModel> parse() {
+		if (getElement() != null) {
 
 			@SuppressWarnings("unchecked")
-			List<Element> itr = document.selectNodes("//models//model");
+			List<Element> itr = getElement().selectNodes("//models//model");
 			List<DomainModel> domains = new ArrayList<DomainModel>(itr.size());
 
 			for (Element tableElement : itr) {
@@ -107,6 +94,7 @@ public class XmlDomainParse implements DomainParse {
 	 * @since 2013-7-22 wangjunming
 	 */
 	protected List<ModelField> parseFields(Element tableElement) {
+		@SuppressWarnings("unchecked")
 		List<Element> itr = tableElement.selectNodes("//models//model");
 		List<ModelField> fields = new ArrayList<ModelField>(itr.size());
 
@@ -124,7 +112,7 @@ public class XmlDomainParse implements DomainParse {
 	 * @return
 	 * @since 2013-7-22 wangjunming
 	 */
-	private ModelField parseField(Element fieldElement) {
+	protected ModelField parseField(Element fieldElement) {
 		ModelField field = new ModelField();
 		String name = fieldElement.attributeValue("name");
 		String description = fieldElement.attributeValue("description");

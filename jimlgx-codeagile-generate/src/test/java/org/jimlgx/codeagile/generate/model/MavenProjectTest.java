@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  * @since 1.0 2013-7-14
  */
 public class MavenProjectTest {
-protected Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * <code>testGenerate</code>
@@ -42,12 +42,12 @@ protected Logger logger = LoggerFactory.getLogger(getClass());
 		project.setCode(project.getArtifactId());
 
 		List<SourceFolder> sourceFolders = SourceFolder
-				.mavenSourceFolder(project.getBasedir() + project.getCode());
+				.mavenSourceFolders(project.getBasedir() + project.getCode());
 
-		project.setSourceFolder(sourceFolders);
-		
+		project.setSourceFolders(sourceFolders);
+
 		List<FileModel> fileModels = new ArrayList<FileModel>();
-		
+
 		project.setFileModels(fileModels);
 		// project.defaultFloder();
 		project.generate();

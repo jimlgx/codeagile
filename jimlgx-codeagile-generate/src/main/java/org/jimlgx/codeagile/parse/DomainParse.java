@@ -23,12 +23,12 @@ import org.jimlgx.codeagile.generate.model.DomainModel;
  */
 public interface DomainParse {
 	/**
-	 * <code>parseDomains</code>
+	 * <code>parse</code>
 	 * 
 	 * 解析Domains
 	 * 
 	 * @return
 	 * @since 2013-7-11 wangjunming
 	 */
-	public List<DomainModel> parseDomains();
+	public List<DomainModel> parse();
 }

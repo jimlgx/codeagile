@@ -53,7 +53,7 @@ public class FileModel extends Folder implements Generate {
 	public void generate() {
 		// TODO Auto-generated method stub
 		logger.debug("{} generate", this);
-		GenerateUtils.createFile(new File(this.getBasedir(), this.getCode()));
+		GenerateUtils.createFileDirectory(new File(this.getBasedir(), this.getCode()));
 		// this.getFile().c
 	}
 }

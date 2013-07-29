@@ -44,7 +44,7 @@ public class PdmParseTest {
 		File file = new File(filePath);
 		parse = new PdmDomainParse(file);
 
-		List<DomainModel> domains = parse.parseDomains();
+		List<DomainModel> domains = parse.parse();
 
 		logger.info("domains = {}", domains);
 	}

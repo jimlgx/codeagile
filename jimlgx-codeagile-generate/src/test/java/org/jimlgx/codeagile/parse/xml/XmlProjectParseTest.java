@@ -12,8 +12,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.jimlgx.codeagile.generate.model.MavenProject;
+import org.jimlgx.codeagile.parse.ParseUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +28,9 @@ import org.slf4j.LoggerFactory;
  * @since 1.0 2013-7-23
  */
 public class XmlProjectParseTest {
-	Logger logger = LoggerFactory.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	XmlProjectParse parse = null;
+	private XmlProjectParse parse = null;
 
 	/**
 	 * <code>testparse</code>
@@ -40,9 +42,13 @@ public class XmlProjectParseTest {
 	@Test
 	public void testparse() throws IOException, DocumentException {
 
-		String filePath = "src/test/resources/data/xml/coder_project_module.xml";
+		String filePath = "src/test/resources/data/xml/jimlgx-base-task.xml";
+
 		File file = new File(filePath);
-		parse = new XmlProjectParse(file);
+
+		Document document = ParseUtils.loadAsDocument(file);
+
+		parse = new XmlProjectParse(document.getRootElement());
 
 		List<MavenProject> projects = parse.parse();
 
