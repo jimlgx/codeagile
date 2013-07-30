@@ -8,6 +8,7 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +47,41 @@ public class JavaFile extends FileModel {
 	private String modifier;
 
 	/**
+	 * List<String> implClass : 实现的接口
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private List<String> implClass = new ArrayList<String>();
+	/**
+	 * List<String> importClass :引入的classes
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private List<String> importClass = new ArrayList<String>();;
+
+	/**
+	 * Package _package :包结构
+	 * 
+	 * @since 2013-7-14 wangjunming
+	 */
+	private PackageFolder packageFolder;
+
+	/**
+	 * @return the packageFolder
+	 */
+	public PackageFolder getPackageFolder() {
+		return packageFolder;
+	}
+
+	/**
+	 * @param packageFolder
+	 *            the packageFolder to set
+	 */
+	public void setPackageFolder(PackageFolder packageFolder) {
+		this.packageFolder = packageFolder;
+	}
+
+	/**
 	 * @return the modifier
 	 */
 	public String getModifier() {
@@ -59,26 +95,6 @@ public class JavaFile extends FileModel {
 	public void setModifier(String modifier) {
 		this.modifier = modifier;
 	}
-
-	/**
-	 * List<String> implClass : 实现的接口
-	 * 
-	 * @since 2013-7-14 wangjunming
-	 */
-	private List<String> implClass;
-	/**
-	 * List<String> importClass :引入的classes
-	 * 
-	 * @since 2013-7-14 wangjunming
-	 */
-	private List<String> importClass;
-
-	/**
-	 * Package _package :包结构
-	 * 
-	 * @since 2013-7-14 wangjunming
-	 */
-	private Package _package;
 
 	/**
 	 * @return the simpleNam
@@ -140,18 +156,17 @@ public class JavaFile extends FileModel {
 		this.importClass = importClass;
 	}
 
-	/**
-	 * @return the _package
-	 */
-	public Package getPackage() {
-		return _package;
+	public SourceFolder getSourceFolder() {
+		if (this.getPackageFolder() != null) {
+			this.getPackageFolder().getSourceFolder();
+		}
+		return null;
 	}
 
-	/**
-	 * @param _package
-	 *            the _package to set
-	 */
-	public void setPackage(Package _package) {
-		this._package = _package;
+	public MavenProject getProject() {
+		if (this.getSourceFolder() != null) {
+			this.getSourceFolder().getProject();
+		}
+		return null;
 	}
 }

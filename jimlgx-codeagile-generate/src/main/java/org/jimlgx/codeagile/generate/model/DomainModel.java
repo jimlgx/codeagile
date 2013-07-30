@@ -28,6 +28,12 @@ public class DomainModel extends AbstractModel {
 	 */
 	private static final long serialVersionUID = 2170681849291764804L;
 	/**
+	 * MVCModule module :
+	 * 
+	 * @since 2013-7-30 wangjunming
+	 */
+	private MVCModule module;
+	/**
 	 * List<ModelField> fields :
 	 * 
 	 * @since 2013-7-11 wangjunming
@@ -69,6 +75,21 @@ public class DomainModel extends AbstractModel {
 	 */
 	public void setFields(List<ModelField> fields) {
 		this.fields = fields;
+	}
+
+	/**
+	 * @return the module
+	 */
+	public MVCModule getModule() {
+		return module;
+	}
+
+	/**
+	 * @param module
+	 *            the module to set
+	 */
+	public void setModule(MVCModule module) {
+		this.module = module;
 	}
 
 }

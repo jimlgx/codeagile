@@ -29,7 +29,29 @@ public class SourceFolder extends Folder {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * MavenProject project :
+	 * 
+	 * @since 2013-7-30 wangjunming
+	 */
+	private MavenProject project;
+
 	public SourceFolder() {
+	}
+
+	/**
+	 * @return the project
+	 */
+	public MavenProject getProject() {
+		return project;
+	}
+
+	/**
+	 * @param project
+	 *            the project to set
+	 */
+	public void setProject(MavenProject project) {
+		this.project = project;
 	}
 
 	/**
@@ -48,6 +70,11 @@ public class SourceFolder extends Folder {
 		this.setBasedir(basedir);
 	}
 
+	public static final String MAIN_JAVA = "src/main/java";
+	public static final String MAIN_RESOURCES = "src/main/resources";
+	public static final String TEST_JAVA = "src/test/java";
+	public static final String TEST_RESOURCES = "src/test/resources";
+
 	/**
 	 * <code>mavenSourceFolders</code>
 	 * 
@@ -56,15 +83,15 @@ public class SourceFolder extends Folder {
 	 * @return
 	 * @since 2013-7-17 wangjunming
 	 */
- 
+
 	public static List<SourceFolder> mavenSourceFolders(String basedir) {
 
 		List<SourceFolder> list = new ArrayList<SourceFolder>();
 
-		list.add(new SourceFolder("src/main/java", basedir));
-		list.add(new SourceFolder("src/main/resources", basedir));
-		list.add(new SourceFolder("src/test/java", basedir));
-		list.add(new SourceFolder("src/test/resources", basedir));
+		list.add(new SourceFolder(MAIN_JAVA, basedir));
+		list.add(new SourceFolder(MAIN_RESOURCES, basedir));
+		list.add(new SourceFolder(TEST_JAVA, basedir));
+		list.add(new SourceFolder(TEST_RESOURCES, basedir));
 
 		return list;
 	}

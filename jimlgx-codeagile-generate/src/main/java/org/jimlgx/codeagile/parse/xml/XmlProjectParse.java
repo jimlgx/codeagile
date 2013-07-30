@@ -115,13 +115,17 @@ public class XmlProjectParse extends AbstractParse implements ProjectParse {
 		
 		
 		List<FileModel> fileModels = FileModel.mavneFile(project.getPath());
+		
 		project.setFileModels(fileModels) ;
 		
 		
 		try {
 			XmlModuleParse moduleParse = new XmlModuleParse(projectElement);
+			
 			List<MavenModule> modules = moduleParse.parse();
+			
 			project.setModules(modules);
+			
 		} catch (RuntimeException e) {
 			// e.printStackTrace();
 			logger.warn("parseModule error");

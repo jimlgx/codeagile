@@ -17,6 +17,8 @@ package org.jimlgx.codeagile.template;
  */
 public class DefaultTemplate {
 
+	public static final String EMPTY = "empty.txt";
+
 	public static class ABSTRACT {
 
 		public static final String Action = "AbstractAction.ftl";

@@ -41,13 +41,15 @@ public class XmlDomainParseTest {
 	@Test
 	public void testparseDomains() throws IOException, DocumentException {
 
-		String filePath = "src/test/resources/data/xml/coder_project_module.xml";
+		// String filePath =
+		// "src/test/resources/data/xml/coder_project_module.xml";
+		String filePath = "src/test/resources/data/xml/jimlgx-base-task.xml";
 
-		// File file = new File(filePath);
-		// parse = new XmlDomainParse(file);
-		//
-		// List<DomainModel> domains = parse.parseDomains();
-		//
-		// logger.info("domains = {}", domains);
+		File file = new File(filePath);
+		parse = new XmlDomainParse(file);
+
+		List<DomainModel> domains = parse.parse();
+
+		logger.info("domains = {}", domains);
 	}
 }

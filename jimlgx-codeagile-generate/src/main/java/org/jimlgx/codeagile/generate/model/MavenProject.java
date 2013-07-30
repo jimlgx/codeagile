@@ -9,6 +9,7 @@
 package org.jimlgx.codeagile.generate.model;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.model.Parent;
@@ -44,7 +45,7 @@ public class MavenProject extends Folder implements Project {
 	/**
 	 * The current version of the artifact produced by this project.
 	 */
-	private String version;
+	private String version = "1.0";
 
 	/**
 	 * 
@@ -86,35 +87,26 @@ public class MavenProject extends Folder implements Project {
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	private List<SourceFolder> sourceFolders;
+	private List<SourceFolder> sourceFolders = new ArrayList<SourceFolder>(0);;
 
 	/**
-	 * List<Package> packages :
-	 * 
-	 * 包结构
+	 * List<MavenModule> modules :功能模块
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	private List<Package> packages;
-
-	/**
-	 * List<MavenModule> modules :
-	 * 
-	 * @since 2013-7-14 wangjunming
-	 */
-	private List<MavenModule> modules;
+	private List<MavenModule> modules = new ArrayList<MavenModule>(0);
 	/**
 	 * List<Folder> folders : 文件夹
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	private List<Folder> folders;
+	private List<Folder> folders = new ArrayList<Folder>(0);;
 	/**
 	 * List<FileModel> fileModels : 文件对象
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	private List<FileModel> fileModels;
+	private List<FileModel> fileModels = new ArrayList<FileModel>(0);;
 
 	/**
 	 * @return the modelVersion
@@ -207,21 +199,6 @@ public class MavenProject extends Folder implements Project {
 	}
 
 	/**
-	 * @return the packages
-	 */
-	public List<Package> getPackages() {
-		return packages;
-	}
-
-	/**
-	 * @param packages
-	 *            the packages to set
-	 */
-	public void setPackages(List<Package> packages) {
-		this.packages = packages;
-	}
-
-	/**
 	 * @return the modules
 	 */
 	public List<MavenModule> getModules() {
@@ -240,14 +217,6 @@ public class MavenProject extends Folder implements Project {
 	 * @return the sourceFolder
 	 */
 	public List<SourceFolder> getSourceFolders() {
-		//
-		// if (CollectionUtils.isEmpty(sourceFolders)) {
-		//
-		// this.sourceFolders = SourceFolder.mavenSourceFolder(this
-		// .getBasedir() + this.getCode());
-		//
-		// }
-
 		return sourceFolders;
 	}
 
@@ -309,11 +278,35 @@ public class MavenProject extends Folder implements Project {
 		logger.debug("generate artifactId : {} ", this.getArtifactId());
 
 		generateFolder();
-		// this.getf
 
+		generateFileModels();
+
+		generateModules();
+	}
+
+	/**
+	 * <code>generateModules</code>
+	 * 
+	 * @since 2013-7-30 wangjunming
+	 */
+	private void generateModules() {
+		List<MavenModule> modules = getModules();
+
+		for (MavenModule mavenModule : modules) {
+			mavenModule.generate();
+		}
+	}
+
+	/**
+	 * <code>generateFileModels</code>
+	 * 
+	 * @since 2013-7-30 wangjunming
+	 */
+	protected void generateFileModels() {
 		if (!CollectionUtils.isEmpty(getFileModels())) {
 			for (FileModel fileModel : getFileModels()) {
-				fileModel.generate();
+				// 以project 对象为模型
+				fileModel.generate(this);
 			}
 		} else {
 			logger.debug("empty fileModels artifactId :{}",

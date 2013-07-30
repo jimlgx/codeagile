@@ -16,6 +16,7 @@ import java.util.List;
  * @version 1.0
  * @author wangjunming
  * @since 1.0 2013-4-14
+ * @deprecated 推荐直接使用 PackageFolder
  */
 public interface Package {
 

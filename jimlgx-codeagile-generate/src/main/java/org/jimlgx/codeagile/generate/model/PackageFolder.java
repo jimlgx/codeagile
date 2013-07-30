@@ -70,6 +70,10 @@ public class PackageFolder extends Folder implements Package {
 	 */
 	public void setJavaFiles(List<JavaFile> javaFiles) {
 		this.javaFiles = javaFiles;
+
+		for (JavaFile javaFile : javaFiles) {
+			javaFile.setPackageFolder(this);
+		}
 	}
 
 	/**
@@ -78,7 +82,6 @@ public class PackageFolder extends Folder implements Package {
 	 * @since 2013-4-11 wangjunming
 	 */
 	public void generate() {
-		// TODO Auto-generated method stub
 		logger.debug("{} generate", this);
 		for (JavaFile javaFile : javaFiles) {
 			javaFile.generate();

@@ -40,7 +40,7 @@ public class MavenProjectTest {
 		project.setBasedir(GenerateUtils.getUserDir());
 
 		project.setArtifactId("jimlgx-codeagile-demo");
-		project.setCode(project.getArtifactId());
+		project.setCode("base/demo");
 
 		List<SourceFolder> sourceFolders = SourceFolder
 
