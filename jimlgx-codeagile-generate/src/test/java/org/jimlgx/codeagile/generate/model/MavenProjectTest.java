@@ -10,6 +10,7 @@ package org.jimlgx.codeagile.generate.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.jimlgx.codeagile.generate.util.GenerateUtils;
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class MavenProjectTest {
 		project.setArtifactId("jimlgx-codeagile-demo");
 		project.setCode("base/demo");
 
-		List<SourceFolder> sourceFolders = SourceFolder
+		Map<String, SourceFolder> sourceFolders = SourceFolder
 
 		.mavenSourceFolders(project.getBasedir() + project.getCode());
 

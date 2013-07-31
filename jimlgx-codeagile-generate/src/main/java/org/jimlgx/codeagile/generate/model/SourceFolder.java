@@ -8,8 +8,8 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <code>SourceFolder</code>
@@ -28,6 +28,11 @@ public class SourceFolder extends Folder {
 	 * @since 2013-7-14 wangjunming
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final String MAIN_JAVA = "src/main/java";
+	public static final String MAIN_RESOURCES = "src/main/resources";
+	public static final String MAIN_WEBAPP = "src/main/webapp";
+	public static final String TEST_JAVA = "src/test/java";
+	public static final String TEST_RESOURCES = "src/test/resources";
 
 	/**
 	 * MavenProject project :
@@ -35,6 +40,13 @@ public class SourceFolder extends Folder {
 	 * @since 2013-7-30 wangjunming
 	 */
 	private MavenProject project;
+
+	/**
+	 * Map<String,PackageFolder> packages :
+	 * 
+	 * @since 2013-7-31 wangjunming
+	 */
+	private Map<String, PackageFolder> packages = new HashMap<String, PackageFolder>();
 
 	public SourceFolder() {
 	}
@@ -70,11 +82,6 @@ public class SourceFolder extends Folder {
 		this.setBasedir(basedir);
 	}
 
-	public static final String MAIN_JAVA = "src/main/java";
-	public static final String MAIN_RESOURCES = "src/main/resources";
-	public static final String TEST_JAVA = "src/test/java";
-	public static final String TEST_RESOURCES = "src/test/resources";
-
 	/**
 	 * <code>mavenSourceFolders</code>
 	 * 
@@ -83,16 +90,46 @@ public class SourceFolder extends Folder {
 	 * @return
 	 * @since 2013-7-17 wangjunming
 	 */
+	public static Map<String, SourceFolder> mavenSourceFolders(String basedir) {
 
-	public static List<SourceFolder> mavenSourceFolders(String basedir) {
+		Map<String, SourceFolder> map = new HashMap<String, SourceFolder>(5);
 
-		List<SourceFolder> list = new ArrayList<SourceFolder>();
+		buildMap(map, MAIN_JAVA, basedir);
+		buildMap(map, MAIN_RESOURCES, basedir);
+		buildMap(map, MAIN_WEBAPP, basedir);
+		buildMap(map, TEST_JAVA, basedir);
+		buildMap(map, TEST_RESOURCES, basedir);
 
-		list.add(new SourceFolder(MAIN_JAVA, basedir));
-		list.add(new SourceFolder(MAIN_RESOURCES, basedir));
-		list.add(new SourceFolder(TEST_JAVA, basedir));
-		list.add(new SourceFolder(TEST_RESOURCES, basedir));
+		return map;
+	}
 
-		return list;
+	/**
+	 * <code>buildMap</code>
+	 * 
+	 * @param map
+	 * @param code
+	 * @param basedir
+	 * @since 2013-7-31 wangjunming
+	 */
+	private static void buildMap(Map<String, SourceFolder> map, String code,
+			String basedir) {
+		map.put(code, new SourceFolder(code, basedir));
+	}
+
+	/**
+	 * <code>setPackages</code>
+	 * 
+	 * @param packages
+	 * @since 2013-7-31 wangjunming
+	 */
+	public void setPackages(Map<String, PackageFolder> packages) {
+		this.packages = packages;
+	}
+
+	/**
+	 * @return the packages
+	 */
+	public Map<String, PackageFolder> getPackages() {
+		return packages;
 	}
 }

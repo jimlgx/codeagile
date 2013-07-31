@@ -10,11 +10,12 @@ package org.jimlgx.codeagile.parse.xml;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.dom4j.Element;
 import org.jimlgx.codeagile.generate.model.FileModel;
 import org.jimlgx.codeagile.generate.model.Folder;
-import org.jimlgx.codeagile.generate.model.MavenModule;
+import org.jimlgx.codeagile.generate.model.MVCModule;
 import org.jimlgx.codeagile.generate.model.MavenProject;
 import org.jimlgx.codeagile.generate.model.SourceFolder;
 import org.jimlgx.codeagile.parse.ParseUtils;
@@ -106,8 +107,9 @@ public class XmlProjectParse extends AbstractParse implements ProjectParse {
 				"artifactId", "groupId", "code", "basedir", "version");
 
 		// sourceFolders
-		List<SourceFolder> sourceFolders = SourceFolder
+		 Map<String,SourceFolder>  sourceFolders = SourceFolder
 				.mavenSourceFolders(project.getPath());
+		 
 		project.setSourceFolders(sourceFolders);
 
 		List<Folder> folders = Folder.docFolder();
@@ -122,7 +124,7 @@ public class XmlProjectParse extends AbstractParse implements ProjectParse {
 		try {
 			XmlModuleParse moduleParse = new XmlModuleParse(projectElement);
 			
-			List<MavenModule> modules = moduleParse.parse();
+			List<MVCModule> modules = moduleParse.parse();
 			
 			project.setModules(modules);
 			

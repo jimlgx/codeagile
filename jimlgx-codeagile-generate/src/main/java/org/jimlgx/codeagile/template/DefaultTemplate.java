@@ -31,8 +31,9 @@ public class DefaultTemplate {
 	public static class MVC {
 
 		public static final String Action = "MVCAction.ftl";
-		public static final String Dao = "MVCDao.ftl";
 		public static final String Manager = "MVCManager.ftl";
+		public static final String Service = "MVCService.ftl";
+		public static final String Dao = "MVCDao.ftl";
 		public static final String Model = "MVCModel.ftl";
 
 	}

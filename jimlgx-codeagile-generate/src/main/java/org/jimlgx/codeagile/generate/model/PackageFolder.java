@@ -8,6 +8,7 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +38,47 @@ public class PackageFolder extends Folder implements Package {
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	private List<JavaFile> javaFiles;
+	private List<JavaFile> javaFiles = new ArrayList<JavaFile>();
+	/**
+	 * List<FileModel> fileModels :其它文件
+	 * 
+	 * @since 2013-7-31 wangjunming
+	 */
+	private List<FileModel> fileModels = new ArrayList<FileModel>();
+
+	/**
+	 * @return the fileModels
+	 */
+	public List<FileModel> getFileModels() {
+		return fileModels;
+	}
+
+	/**
+	 * @param fileModels
+	 *            the fileModels to set
+	 */
+	public void setFileModels(List<FileModel> fileModels) {
+		this.fileModels = fileModels;
+	}
+
+	/**
+	 * 
+	 */
+	public PackageFolder() {
+		super();
+	}
+
+	/**
+	 * @param code
+	 */
+	public PackageFolder(String code) {
+		super(code);
+	}
+
+	public PackageFolder(PackageFolder folder, String code) {
+		super(folder.getCode() + "." + code);
+
+	}
 
 	/**
 	 * <code>getJavaFiles</code>

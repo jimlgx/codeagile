@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.dom4j.Element;
 import org.jimlgx.codeagile.generate.model.DomainModel;
+import org.jimlgx.codeagile.generate.model.MVCModule;
 import org.jimlgx.codeagile.generate.model.MavenModule;
 import org.jimlgx.codeagile.parse.ParseUtils;
 
@@ -45,16 +46,16 @@ public class XmlModuleParse extends AbstractParse {
 	 * @return
 	 * @since 2013-7-23 wangjunming
 	 */
-	public List<MavenModule> parse() {
+	public List<MVCModule> parse() {
 
 		if (getElement() != null) {
 
 			@SuppressWarnings("unchecked")
 			List<Element> itr = getElement().selectNodes("//modules//module");
-			List<MavenModule> module = new ArrayList<MavenModule>(itr.size());
+			List<MVCModule> module = new ArrayList<MVCModule>(itr.size());
 
 			for (Element moduleElement : itr) {
-				MavenModule project = parseMavenModule(moduleElement);
+				MVCModule project = parseMavenModule(moduleElement);
 
 				module.add(project);
 			}
@@ -70,8 +71,8 @@ public class XmlModuleParse extends AbstractParse {
 	 * @return
 	 * @since 2013-7-26 wangjunming
 	 */
-	protected MavenModule parseMavenModule(Element moduleElement) {
-		MavenModule module = new MavenModule();
+	protected MVCModule parseMavenModule(Element moduleElement) {
+		MVCModule module = new MVCModule();
 		ParseUtils.parseAttributeValue(moduleElement, module, "name",
 				"parseType", "pdm", "code", "version");
 
@@ -86,7 +87,7 @@ public class XmlModuleParse extends AbstractParse {
 	 * @param module
 	 * @since 2013-7-29 wangjunming
 	 */
-	protected void parseDomainModels(Element moduleElement, MavenModule module) {
+	protected void parseDomainModels(Element moduleElement, MVCModule module) {
 		try {
 			XmlDomainParse domainParse = new XmlDomainParse(moduleElement);
 			List<DomainModel> domains = domainParse.parse();

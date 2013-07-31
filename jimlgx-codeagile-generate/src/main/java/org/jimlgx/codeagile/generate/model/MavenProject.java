@@ -10,7 +10,9 @@ package org.jimlgx.codeagile.generate.model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.maven.model.Parent;
 import org.jimlgx.codeagile.generate.util.GenerateUtils;
@@ -83,18 +85,19 @@ public class MavenProject extends Folder implements Project {
 	 */
 	private String groupId;
 	/**
-	 * SourceFolder sourceFolders :源码目录
+	 * Map<String,SourceFolder> sourceFolders :源码目录
 	 * 
-	 * @since 2013-7-14 wangjunming
+	 * @since 2013-7-31 wangjunming
 	 */
-	private List<SourceFolder> sourceFolders = new ArrayList<SourceFolder>(0);;
+	private Map<String, SourceFolder> sourceFolders = new HashMap<String, SourceFolder>(
+			4);
 
 	/**
-	 * List<MavenModule> modules :功能模块
+	 * List<MVCModule> modules :功能模块
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	private List<MavenModule> modules = new ArrayList<MavenModule>(0);
+	private List<MVCModule> modules = new ArrayList<MVCModule>(0);
 	/**
 	 * List<Folder> folders : 文件夹
 	 * 
@@ -201,7 +204,7 @@ public class MavenProject extends Folder implements Project {
 	/**
 	 * @return the modules
 	 */
-	public List<MavenModule> getModules() {
+	public List<MVCModule> getModules() {
 		return modules;
 	}
 
@@ -209,15 +212,8 @@ public class MavenProject extends Folder implements Project {
 	 * @param modules
 	 *            the modules to set
 	 */
-	public void setModules(List<MavenModule> modules) {
+	public void setModules(List<MVCModule> modules) {
 		this.modules = modules;
-	}
-
-	/**
-	 * @return the sourceFolder
-	 */
-	public List<SourceFolder> getSourceFolders() {
-		return sourceFolders;
 	}
 
 	/**
@@ -257,15 +253,23 @@ public class MavenProject extends Folder implements Project {
 	}
 
 	/**
+	 * @return the sourceFolders
+	 */
+	public Map<String, SourceFolder> getSourceFolders() {
+		return sourceFolders;
+	}
+
+	/**
 	 * @param sourceFolders
 	 *            the sourceFolders to set
 	 */
-	public void setSourceFolders(List<SourceFolder> sourceFolders) {
+	public void setSourceFolders(Map<String, SourceFolder> sourceFolders) {
 		this.sourceFolders = sourceFolders;
-		for (SourceFolder sourceFolder : sourceFolders) {
-			sourceFolder.setBasedir(this.getPath());
-
+		for (Map.Entry<String, SourceFolder> entry : this.getSourceFolders()
+				.entrySet()) {
+			entry.getValue().setProject(this);
 		}
+
 	}
 
 	/**
@@ -290,9 +294,9 @@ public class MavenProject extends Folder implements Project {
 	 * @since 2013-7-30 wangjunming
 	 */
 	private void generateModules() {
-		List<MavenModule> modules = getModules();
+		List<MVCModule> modules = getModules();
 
-		for (MavenModule mavenModule : modules) {
+		for (MVCModule mavenModule : modules) {
 			mavenModule.generate();
 		}
 	}
@@ -325,8 +329,9 @@ public class MavenProject extends Folder implements Project {
 		GenerateUtils.createFileDirectory(new File(getPath()));
 
 		if (!CollectionUtils.isEmpty(this.getSourceFolders())) {
-			for (SourceFolder sourceFolder : this.getSourceFolders()) {
-				sourceFolder.generate();
+			for (Map.Entry<String, SourceFolder> entry : this
+					.getSourceFolders().entrySet()) {
+				entry.getValue().generate();
 			}
 		} else {
 
