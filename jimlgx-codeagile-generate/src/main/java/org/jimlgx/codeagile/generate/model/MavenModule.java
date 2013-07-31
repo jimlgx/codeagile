@@ -42,7 +42,6 @@ public class MavenModule extends MavenProject {
 	 */
 	private MavenModule parentModule;
 
-	
 	/**
 	 * @return the parentModule
 	 */
