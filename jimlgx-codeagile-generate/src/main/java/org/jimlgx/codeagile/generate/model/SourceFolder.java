@@ -83,14 +83,31 @@ public class SourceFolder extends Folder {
 	}
 
 	/**
-	 * <code>mavenSourceFolders</code>
+	 * <code>setPackages</code>
+	 * 
+	 * @param packages
+	 * @since 2013-7-31 wangjunming
+	 */
+	public void setPackages(Map<String, PackageFolder> packages) {
+		this.packages = packages;
+	}
+
+	/**
+	 * @return the packages
+	 */
+	public Map<String, PackageFolder> getPackages() {
+		return packages;
+	}
+
+	/**
+	 * <code>mapMavenSourceFolders</code>
 	 * 
 	 * 默认的mavne源码包结构
 	 * 
 	 * @return
 	 * @since 2013-7-17 wangjunming
 	 */
-	public static Map<String, SourceFolder> mavenSourceFolders(String basedir) {
+	public static Map<String, SourceFolder> mapMavenSourceFolders(String basedir) {
 
 		Map<String, SourceFolder> map = new HashMap<String, SourceFolder>(5);
 
@@ -114,22 +131,5 @@ public class SourceFolder extends Folder {
 	private static void buildMap(Map<String, SourceFolder> map, String code,
 			String basedir) {
 		map.put(code, new SourceFolder(code, basedir));
-	}
-
-	/**
-	 * <code>setPackages</code>
-	 * 
-	 * @param packages
-	 * @since 2013-7-31 wangjunming
-	 */
-	public void setPackages(Map<String, PackageFolder> packages) {
-		this.packages = packages;
-	}
-
-	/**
-	 * @return the packages
-	 */
-	public Map<String, PackageFolder> getPackages() {
-		return packages;
 	}
 }

@@ -9,6 +9,7 @@
 package org.jimlgx.codeagile.generate.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,12 +45,10 @@ public class MavenProjectTest {
 		project.setCode("base/demo");
 
 		Map<String, SourceFolder> sourceFolders = SourceFolder
-
-		.mavenSourceFolders(project.getBasedir() + project.getCode());
-
+				.mapMavenSourceFolders(project.getBasedir() + project.getCode());
 		project.setSourceFolders(sourceFolders);
 
-		List<FileModel> fileModels = new ArrayList<FileModel>();
+		Map<String, FileModel> fileModels = new HashMap<String, FileModel>();
 
 		project.setFileModels(fileModels);
 		// project.defaultFloder();

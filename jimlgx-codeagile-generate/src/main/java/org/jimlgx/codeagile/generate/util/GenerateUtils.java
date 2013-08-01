@@ -145,4 +145,18 @@ public class GenerateUtils {
 		}
 		return filePath;
 	}
+
+	/**
+	 * <code>remove</code>
+	 * 
+	 * @param file
+	 * @since 2013-8-1 wangjunming
+	 */
+	public static void remove(File file) {
+
+		if (file.exists() && file.isFile()) {
+			logger.info("remove file:{}", file);
+			file.delete();
+		}
+	}
 }

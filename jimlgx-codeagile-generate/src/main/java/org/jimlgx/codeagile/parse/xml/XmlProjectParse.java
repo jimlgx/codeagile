@@ -102,32 +102,30 @@ public class XmlProjectParse extends AbstractParse implements ProjectParse {
 	private MavenProject parseProject(Element projectElement) {
 		MavenProject project = new MavenProject();
 
- 
 		ParseUtils.parseAttributeValue(projectElement, project, "name",
 				"artifactId", "groupId", "code", "basedir", "version");
 
 		// sourceFolders
-		 Map<String,SourceFolder>  sourceFolders = SourceFolder
-				.mavenSourceFolders(project.getPath());
-		 
+		Map<String, SourceFolder> sourceFolders = SourceFolder
+				.mapMavenSourceFolders(project.getPath());
+
 		project.setSourceFolders(sourceFolders);
 
-		List<Folder> folders = Folder.docFolder();
+		Map<String, Folder> folders = Folder.mapDocFolder();
 		project.setFolders(folders);
-		
-		
-		List<FileModel> fileModels = FileModel.mavneFile(project.getPath());
-		
-		project.setFileModels(fileModels) ;
-		
-		
+
+		Map<String, FileModel> fileModels = FileModel.mapMavneFile(project
+				.getPath());
+
+		project.setFileModels(fileModels);
+
 		try {
 			XmlModuleParse moduleParse = new XmlModuleParse(projectElement);
-			
+
 			List<MVCModule> modules = moduleParse.parse();
-			
+
 			project.setModules(modules);
-			
+
 		} catch (RuntimeException e) {
 			// e.printStackTrace();
 			logger.warn("parseModule error");

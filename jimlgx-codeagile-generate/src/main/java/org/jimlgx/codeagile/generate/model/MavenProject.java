@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.apache.maven.model.Parent;
 import org.jimlgx.codeagile.generate.util.GenerateUtils;
@@ -98,18 +100,6 @@ public class MavenProject extends Folder implements Project {
 	 * @since 2013-7-14 wangjunming
 	 */
 	private List<MVCModule> modules = new ArrayList<MVCModule>(0);
-	/**
-	 * List<Folder> folders : 文件夹
-	 * 
-	 * @since 2013-7-14 wangjunming
-	 */
-	private List<Folder> folders = new ArrayList<Folder>(0);;
-	/**
-	 * List<FileModel> fileModels : 文件对象
-	 * 
-	 * @since 2013-7-14 wangjunming
-	 */
-	private List<FileModel> fileModels = new ArrayList<FileModel>(0);;
 
 	/**
 	 * @return the modelVersion
@@ -217,42 +207,6 @@ public class MavenProject extends Folder implements Project {
 	}
 
 	/**
-	 * @return the folders
-	 */
-	public List<Folder> getFolders() {
-		return folders;
-	}
-
-	/**
-	 * @param folders
-	 *            the folders to set
-	 */
-	public void setFolders(List<Folder> folders) {
-		this.folders = folders;
-		for (Folder folder : folders) {
-			folder.setBasedir(this.getPath());
-		}
-	}
-
-	/**
-	 * @return the fileModels
-	 */
-	public List<FileModel> getFileModels() {
-		return fileModels;
-	}
-
-	/**
-	 * @param fileModels
-	 *            the fileModels to set
-	 */
-	public void setFileModels(List<FileModel> fileModels) {
-		this.fileModels = fileModels;
-		for (FileModel fileModel : fileModels) {
-			fileModel.setBasedir(this.getPath());
-		}
-	}
-
-	/**
 	 * @return the sourceFolders
 	 */
 	public Map<String, SourceFolder> getSourceFolders() {
@@ -283,6 +237,8 @@ public class MavenProject extends Folder implements Project {
 
 		generateFolder();
 
+		generateSourceFolders();
+
 		generateFileModels();
 
 		generateModules();
@@ -302,31 +258,11 @@ public class MavenProject extends Folder implements Project {
 	}
 
 	/**
-	 * <code>generateFileModels</code>
-	 * 
-	 * @since 2013-7-30 wangjunming
-	 */
-	protected void generateFileModels() {
-		if (!CollectionUtils.isEmpty(getFileModels())) {
-			for (FileModel fileModel : getFileModels()) {
-				// 以project 对象为模型
-				fileModel.generate(this);
-			}
-		} else {
-			logger.debug("empty fileModels artifactId :{}",
-					this.getArtifactId());
-		}
-	}
-
-	/**
-	 * <code>generateFolder</code>
+	 * <code>generateSourceFolders</code>
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	@Override
-	public void generateFolder() {
-
-		GenerateUtils.createFileDirectory(new File(getPath()));
+	protected void generateSourceFolders() {
 
 		if (!CollectionUtils.isEmpty(this.getSourceFolders())) {
 			for (Map.Entry<String, SourceFolder> entry : this
@@ -339,13 +275,6 @@ public class MavenProject extends Folder implements Project {
 					this.getArtifactId());
 		}
 
-		if (!CollectionUtils.isEmpty(this.getFolders())) {
-			for (Folder folder : this.getFolders()) {
-				folder.generate();
-			}
-		} else {
-			logger.debug("empty folders artifactId :{}", this.getArtifactId());
-		}
 	}
 
 }

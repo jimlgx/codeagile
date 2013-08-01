@@ -8,7 +8,6 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
-import java.util.List;
 
 /**
  * <code>MavenModule</code>

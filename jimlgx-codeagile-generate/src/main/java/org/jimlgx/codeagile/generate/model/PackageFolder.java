@@ -18,7 +18,7 @@ import java.util.List;
  * @author wangjunming
  * @since 1.0 2013-4-14
  */
-public class PackageFolder extends Folder implements Package {
+public class PackageFolder extends Folder {
 
 	/**
 	 * long serialVersionUID :
@@ -39,27 +39,6 @@ public class PackageFolder extends Folder implements Package {
 	 * @since 2013-7-14 wangjunming
 	 */
 	private List<JavaFile> javaFiles = new ArrayList<JavaFile>();
-	/**
-	 * List<FileModel> fileModels :其它文件
-	 * 
-	 * @since 2013-7-31 wangjunming
-	 */
-	private List<FileModel> fileModels = new ArrayList<FileModel>();
-
-	/**
-	 * @return the fileModels
-	 */
-	public List<FileModel> getFileModels() {
-		return fileModels;
-	}
-
-	/**
-	 * @param fileModels
-	 *            the fileModels to set
-	 */
-	public void setFileModels(List<FileModel> fileModels) {
-		this.fileModels = fileModels;
-	}
 
 	/**
 	 * 

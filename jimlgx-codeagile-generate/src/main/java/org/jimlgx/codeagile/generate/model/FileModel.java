@@ -11,7 +11,9 @@ package org.jimlgx.codeagile.generate.model;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jimlgx.codeagile.generate.Generate;
@@ -101,6 +103,16 @@ public class FileModel extends Folder implements Generate {
 	}
 
 	/**
+	 * <code>remove</code> 移除文件对象
+	 * 
+	 * @since 2013-8-1 wangjunming
+	 */
+	public void remove() {
+		File file = new File(getPath());
+		GenerateUtils.remove(file);
+	}
+
+	/**
 	 * <code>generate</code>
 	 * 
 	 * @param object
@@ -126,12 +138,19 @@ public class FileModel extends Folder implements Generate {
 	 * @since 2013-7-29 wangjunming
 	 */
 	public static List<FileModel> mavneFile(String path) {
-		List<FileModel> fileModels = new ArrayList<FileModel>();
+		Map<String, FileModel> map = mapMavneFile(path);
+		return new ArrayList<FileModel>(map.values());
+	}
 
-		fileModels.add(new FileModel("pom.xml", DefaultTemplate.XML.pom));
-		fileModels.add(new FileModel("doc/readme.txt"));
-		fileModels.add(new FileModel("doc/changelog.txt"));
+	public static Map<String, FileModel> mapMavneFile(String path) {
+		// List<FileModel> fileModels = new ArrayList<FileModel>();
+		Map<String, FileModel> map = new HashMap<String, FileModel>();
+		map.put("pom.xml", new FileModel("pom.xml", DefaultTemplate.XML.pom));
+		map.put("doc/readme.txt", new FileModel("doc/readme.txt",
+				DefaultTemplate.EMPTY));
+		map.put("doc/changelog.txt", new FileModel("doc/changelog.txt",
+				DefaultTemplate.EMPTY));
 
-		return fileModels;
+		return map;
 	}
 }

@@ -10,6 +10,8 @@ package org.jimlgx.codeagile.generate.model;
 
 import java.util.List;
 
+import org.jimlgx.codeagile.generate.MvcConstants;
+
 /**
  * <code>DomainModel</code>
  * 
@@ -32,7 +34,7 @@ public class DomainModel extends AbstractModel {
 	 * 
 	 * @since 2013-7-30 wangjunming
 	 */
-	private MVCModule module;
+	private MvcConstants module;
 	/**
 	 * List<ModelField> fields :
 	 * 
@@ -80,7 +82,7 @@ public class DomainModel extends AbstractModel {
 	/**
 	 * @return the module
 	 */
-	public MVCModule getModule() {
+	public MvcConstants getModule() {
 		return module;
 	}
 
@@ -88,7 +90,7 @@ public class DomainModel extends AbstractModel {
 	 * @param module
 	 *            the module to set
 	 */
-	public void setModule(MVCModule module) {
+	public void setModule(MvcConstants module) {
 		this.module = module;
 	}
 
