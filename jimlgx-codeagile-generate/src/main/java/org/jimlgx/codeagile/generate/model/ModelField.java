@@ -19,7 +19,7 @@ import org.jimlgx.codeagile.generate.Generate;
  * @author wangjunming
  * @since 1.0 2013-4-14
  */
-public class ModelField extends AbstractModel implements Generate {
+public class ModelField extends AbstractModel {
 
 	/**
 	 * long serialVersionUID :
@@ -164,14 +164,5 @@ public class ModelField extends AbstractModel implements Generate {
 	public void setPrimaryKey(boolean primaryKey) {
 		this.primaryKey = primaryKey;
 	}
-
-	/**
-	 * <code>generate</code>
-	 * 
-	 * @since 2013-4-11 wangjunming
-	 */
-	public void generate() {
-		// TODO Auto-generated method stub
-		logger.debug("{} generate", this);
-	}
+ 
 }

@@ -34,24 +34,6 @@ import org.slf4j.LoggerFactory;
 public class XmlProjectParse extends AbstractParse implements ProjectParse {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	//
-	// private Document document;
-	//
-	// /**
-	// *
-	// */
-	//
-	// public XmlProjectParse(File file) {
-	// super();
-	// SAXReader sr = new SAXReader();
-	// try {
-	// document = sr.read(file);
-	// } catch (DocumentException e) {
-	// throw new IllegalArgumentException("the " + file.getPath()
-	// + " not pdm file", e);
-	// }
-	// }
-
 	/**
 	 * 
 	 */
@@ -121,10 +103,13 @@ public class XmlProjectParse extends AbstractParse implements ProjectParse {
 
 		try {
 			XmlModuleParse moduleParse = new XmlModuleParse(projectElement);
+			project.setSourceFolders(SourceFolder.mapMavenSourceFolders(project
+					.getPath()));
 
 			List<MVCModule> modules = moduleParse.parse();
 
 			project.setModules(modules);
+
 
 		} catch (RuntimeException e) {
 			// e.printStackTrace();

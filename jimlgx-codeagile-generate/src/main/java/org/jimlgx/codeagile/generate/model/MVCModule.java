@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.jimlgx.codeagile.generate.Generate;
 import org.jimlgx.codeagile.generate.MvcConstants;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -69,7 +70,7 @@ public class MVCModule extends Folder implements Generate, MvcConstants {
 	 * 
 	 * @since 2013-8-1 wangjunming
 	 */
-	private List<DomainGenerate> domainGenerates = new ArrayList<DomainGenerate>();
+	private List<? extends DomainGenerate> domainGenerates = new ArrayList<DomainGenerate>();
 
 	/**
 	 * 
@@ -106,7 +107,7 @@ public class MVCModule extends Folder implements Generate, MvcConstants {
 	/**
 	 * @return the domainGenerates
 	 */
-	public List<DomainGenerate> getDomainGenerates() {
+	public List<? extends DomainGenerate> getDomainGenerates() {
 		return domainGenerates;
 	}
 
@@ -114,7 +115,8 @@ public class MVCModule extends Folder implements Generate, MvcConstants {
 	 * @param domainGenerates
 	 *            the domainGenerates to set
 	 */
-	public void setDomainGenerates(List<DomainGenerate> domainGenerates) {
+	public void setDomainGenerates(
+			List<? extends DomainGenerate> domainGenerates) {
 		this.domainGenerates = domainGenerates;
 	}
 
@@ -130,7 +132,9 @@ public class MVCModule extends Folder implements Generate, MvcConstants {
 	 *            the project to set
 	 */
 	public void setProject(MavenProject project) {
+		Assert.notNull(project);
 		this.project = project;
+		this.setBasedir(project.getBasedir());
 	}
 
 	/**
@@ -164,15 +168,29 @@ public class MVCModule extends Folder implements Generate, MvcConstants {
 	}
 
 	/**
+	 * <code>getPath</code>
+	 * 
+	 * @return
+	 * @since 2013-8-2 wangjunming
+	 */
+	@Override
+	public String getPath() {
+		if (getProject() != null) {
+			return getProject().getPath();
+		}
+		return super.getPath();
+
+	}
+
+	/**
 	 * <code>generate</code>
 	 * 
 	 * @since 2013-7-30 wangjunming
 	 */
 	public void generate() {
-		parseDomains();
-
 		generateSourceFolder();
 		generateFolder();
+		generateDomains();
 		generateFileModels();
 
 	}
@@ -190,19 +208,33 @@ public class MVCModule extends Folder implements Generate, MvcConstants {
 	}
 
 	/**
-	 * <code>parseDomains</code>
+	 * <code>generateDomains</code>
 	 * 
 	 * @since 2013-7-31 wangjunming
 	 */
-	protected void parseDomains() {
+	protected void generateDomains() {
+		if (!CollectionUtils.isEmpty(getDomains())) {
+			for (DomainModel domainModel : getDomains()) {
+				doGenerates(domainModel);
+			}
+		} else {
+			logger.info("domains is empty please register generate");
+		}
+	}
 
-		List<DomainModel> domains = getDomains();
-
-		for (DomainModel domainModel : domains) {
-			List<DomainGenerate> domainGenerates = getDomainGenerates();
-			for (DomainGenerate domainGenerate : domainGenerates) {
+	/**
+	 * <code>doGenerates</code>
+	 * 
+	 * @param domainModel
+	 * @since 2013-8-2 wangjunming
+	 */
+	protected void doGenerates(DomainModel domainModel) {
+		if (!CollectionUtils.isEmpty(getDomainGenerates())) {
+			for (DomainGenerate domainGenerate : getDomainGenerates()) {
 				domainGenerate.generate(domainModel);
 			}
+		} else {
+			logger.info("domainGenerates is empty please register generate");
 		}
 	}
 

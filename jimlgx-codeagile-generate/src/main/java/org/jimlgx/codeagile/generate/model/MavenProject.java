@@ -8,16 +8,12 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import org.apache.maven.model.Parent;
-import org.jimlgx.codeagile.generate.util.GenerateUtils;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -100,6 +96,20 @@ public class MavenProject extends Folder implements Project {
 	 * @since 2013-7-14 wangjunming
 	 */
 	private List<MVCModule> modules = new ArrayList<MVCModule>(0);
+
+	/**
+	 * 
+	 */
+	public MavenProject() {
+		super();
+	}
+
+	/**
+	 * @param code
+	 */
+	public MavenProject(String code) {
+		super(code);
+	}
 
 	/**
 	 * @return the modelVersion
@@ -204,6 +214,10 @@ public class MavenProject extends Folder implements Project {
 	 */
 	public void setModules(List<MVCModule> modules) {
 		this.modules = modules;
+
+		for (MVCModule mvcModule : this.modules) {
+			mvcModule.setProject(this);
+		}
 	}
 
 	/**

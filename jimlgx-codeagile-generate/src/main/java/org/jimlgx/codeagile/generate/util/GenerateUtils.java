@@ -138,7 +138,7 @@ public class GenerateUtils {
 
 		if (StringUtils.endsWith(filePath, "\\")
 				|| StringUtils.endsWith(filePath, "/")) {
-			logger.debug("basedir = {}", basedir);
+			// logger.debug("basedir = {}", basedir);
 
 		} else {
 			filePath = filePath + "\\";

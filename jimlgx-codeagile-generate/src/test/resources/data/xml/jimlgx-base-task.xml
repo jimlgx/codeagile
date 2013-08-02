@@ -5,6 +5,9 @@
 		code="task" basedir="base/">
 		<modules>
 			<module name="任务管理" code="task" parseType="xml">
+				<generates>
+					<bean name="mvc"></bean>
+				</generates>
 				<pdm file="" description="pdm文件解析模型">
 				</pdm>
 				<dbconfig description="数据库反向解析模型">

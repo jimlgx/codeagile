@@ -8,8 +8,14 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import hidden.org.codehaus.plexus.interpolation.util.StringUtils;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jimlgx.codeagile.generate.util.GenerateUtils;
+import org.springframework.util.CollectionUtils;
 
 /**
  * <code>PackageFolder</code>
@@ -54,8 +60,13 @@ public class PackageFolder extends Folder {
 		super(code);
 	}
 
-	public PackageFolder(PackageFolder folder, String code) {
-		super(folder.getCode() + "." + code);
+	public PackageFolder(PackageFolder parent, String code) {
+
+		super(parent.getCode() + "." + code);
+
+		// 设置 basedir
+		this.setBasedir(parent.getBasedir());
+		this.setSourceFolder(parent.getSourceFolder());
 
 	}
 
@@ -91,8 +102,10 @@ public class PackageFolder extends Folder {
 	public void setJavaFiles(List<JavaFile> javaFiles) {
 		this.javaFiles = javaFiles;
 
-		for (JavaFile javaFile : javaFiles) {
-			javaFile.setPackageFolder(this);
+		if (!CollectionUtils.isEmpty(this.javaFiles)) {
+			for (JavaFile javaFile : this.javaFiles) {
+				javaFile.setPackageFolder(this);
+			}
 		}
 	}
 
@@ -102,10 +115,38 @@ public class PackageFolder extends Folder {
 	 * @since 2013-4-11 wangjunming
 	 */
 	public void generate() {
-		logger.debug("{} generate", this);
+		logger.debug("generate {} ", this.getPath());
+		generatePacakgeFolder();
 		for (JavaFile javaFile : javaFiles) {
 			javaFile.generate();
 		}
+	}
+
+	/**
+	 * <code>getPath</code>
+	 * 
+	 * 返回 package名称对应的目录文件结构
+	 * 
+	 * @return
+	 * @since 2013-8-2 wangjunming
+	 */
+	@Override
+	public String getPath() {
+
+		String folderCode = ModuleUtils.buildFolderCode(this.getCode());
+
+		return getBasedir() + folderCode;
+	}
+
+	/**
+	 * <code>generatePacakgeFolder</code>
+	 * 
+	 * @since 2013-8-2 wangjunming
+	 */
+	private void generatePacakgeFolder() {
+
+		GenerateUtils.createFileDirectory(new File(getPath()));
+
 	}
 
 }

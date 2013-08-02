@@ -11,6 +11,8 @@ package org.jimlgx.codeagile.generate.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jimlgx.codeagile.generate.Generate;
+
 /**
  * <code>SourceFolder</code>
  * 
@@ -89,7 +91,12 @@ public class SourceFolder extends Folder {
 	 * @since 2013-7-31 wangjunming
 	 */
 	public void setPackages(Map<String, PackageFolder> packages) {
+
 		this.packages = packages;
+
+		for (PackageFolder folder : getPackages().values()) {
+			folder.setBasedir(getPath());
+		}
 	}
 
 	/**
@@ -97,6 +104,21 @@ public class SourceFolder extends Folder {
 	 */
 	public Map<String, PackageFolder> getPackages() {
 		return packages;
+	}
+
+	/**
+	 * <code>generate</code>
+	 * 
+	 * @since 2013-8-2 wangjunming
+	 */
+	@Override
+	public void generate() {
+
+		super.generate();
+
+		for (PackageFolder folder : getPackages().values()) {
+			folder.generate();
+		}
 	}
 
 	/**

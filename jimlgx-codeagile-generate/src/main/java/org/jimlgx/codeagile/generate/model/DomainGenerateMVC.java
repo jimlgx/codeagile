@@ -99,8 +99,8 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 			PackageFolder pFolder = pfEntry.getValue();
 
 			if (MVC_MODEL.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "Dao",
-						DefaultTemplate.MVC.Dao, domainModel, pFolder);
+				buildJavaFile(domainModel.getCode(), DefaultTemplate.MVC.Dao,
+						domainModel, pFolder);
 
 				PropertiesFile propertiesFile = ModuleUtils
 						.buildPropertiesByDomain(domainModel);
@@ -184,7 +184,7 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 
 		// 设置模板
 		javaDomainFile.setTemplate(template);
-
+		javaDomainFile.setExtension(".java");
 		// 建立双向关系
 		javaDomainFile.setPackageFolder(pFolder);
 		pFolder.getJavaFiles().add(javaDomainFile);
@@ -212,6 +212,11 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 				SourceFolder sourceFolder = sfEntry.getValue();
 				buildMainWebappFile(domainModel, sourceFolder);
 			}
+		}
+
+		// 生成
+		for (SourceFolder folder : sourceFolders.values()) {
+			folder.generate();
 		}
 
 	}

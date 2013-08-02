@@ -120,10 +120,8 @@ public class Folder extends AbstractModel implements Generate {
 	public void setFolders(Map<String, Folder> folders) {
 		this.folders = folders;
 		if (!CollectionUtils.isEmpty(folders)) {
-			Set<Entry<String, Folder>> set = this.folders.entrySet();
-			for (Entry<String, Folder> entry : set) {
-				entry.getValue().setBasedir(getPath());
-
+			for (Folder entry : this.folders.values()) {
+				entry.setBasedir(getPath());
 			}
 		}
 	}
@@ -141,10 +139,11 @@ public class Folder extends AbstractModel implements Generate {
 	 */
 	public void setFileModels(Map<String, FileModel> fileModels) {
 		this.fileModels = fileModels;
-		Set<Entry<String, FileModel>> set = fileModels.entrySet();
-		for (Entry<String, FileModel> entry : set) {
-			entry.getValue().setBasedir(getPath());
 
+		if (!CollectionUtils.isEmpty(this.fileModels)) {
+			for (FileModel fileModel : this.fileModels.values()) {
+				fileModel.setBasedir(getPath());
+			}
 		}
 
 	}

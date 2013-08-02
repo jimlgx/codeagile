@@ -8,12 +8,9 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.jimlgx.codeagile.generate.util.GenerateUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +36,8 @@ public class MavenProjectTest {
 
 		MavenProject project = new MavenProject();
 
-		project.setBasedir(GenerateUtils.getUserDir());
+		// project.setBasedir(GenerateUtils.getUserDir());
+		project.setBasedir("target");
 
 		project.setArtifactId("jimlgx-codeagile-demo");
 		project.setCode("base/demo");

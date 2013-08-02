@@ -47,6 +47,27 @@ public class FileModel extends Folder implements Generate {
 	 * @since 2013-7-30 wangjunming
 	 */
 	private String template;
+	/**
+	 * String extension :文件后缀
+	 * 
+	 * @since 2013-8-2 wangjunming
+	 */
+	protected String extension = StringUtils.EMPTY;
+
+	/**
+	 * @return the extension
+	 */
+	public String getExtension() {
+		return extension;
+	}
+
+	/**
+	 * @param extension
+	 *            the extension to set
+	 */
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
 
 	/**
 	 * @return the template
@@ -121,8 +142,8 @@ public class FileModel extends Folder implements Generate {
 	public void generate(Object object) {
 		// XXX 生成文件
 		try {
-			FreemarkerUtils.createFile(getTemplate(), new File(getPath()),
-					object);
+			FreemarkerUtils.createFile(getTemplate(), new File(getPath()
+					+ getExtension()), object);
 		} catch (IOException e) {
 			logger.warn(e.getMessage(), e);
 		} catch (TemplateException e) {

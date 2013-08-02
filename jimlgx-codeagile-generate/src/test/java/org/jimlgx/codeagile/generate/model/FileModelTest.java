@@ -8,6 +8,7 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import org.apache.commons.io.FilenameUtils;
 import org.junit.Test;
 
 /**
@@ -29,5 +30,6 @@ public class FileModelTest {
 
 		// model.remove();
 
+		// FilenameUtils.getExtension(filename)
 	}
 }

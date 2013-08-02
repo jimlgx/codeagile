@@ -8,10 +8,16 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import hidden.org.codehaus.plexus.interpolation.util.StringUtils;
+
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.jimlgx.codeagile.generate.MvcConstants;
 import org.jimlgx.codeagile.template.DefaultTemplate;
 
@@ -102,4 +108,53 @@ public class ModuleUtils implements MvcConstants {
 		return file;
 	}
 
+	/**
+	 * <code>buildFolderCode</code>
+	 * 
+	 * @param code
+	 * @return
+	 * @since 2013-8-2 wangjunming
+	 */
+	public static String buildFolderCode(String code) {
+		String folderCode = StringUtils.replace(code, ".", File.separator);
+		return folderCode;
+	}
+
+	/**
+	 * <code>reflectionNewInstance</code>
+	 * 
+	 * @param module
+	 * @param generate
+	 * @since 2013-8-2 wangjunming
+	 */
+	public static DomainGenerate reflectionNewInstance(MVCModule module,
+			String generate) {
+		DomainGenerate generate2 = null;
+		try {
+			Class<? extends DomainGenerate> genClass = (Class<? extends DomainGenerate>) ClassUtils
+					.getClass(generate);
+			Constructor<? extends DomainGenerate> constructor = genClass
+					.getConstructor(MVCModule.class);
+			generate2 = constructor.newInstance(module);
+
+			return generate2;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }

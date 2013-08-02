@@ -79,6 +79,7 @@ public class JavaFile extends FileModel {
 	 */
 	public void setPackageFolder(PackageFolder packageFolder) {
 		this.packageFolder = packageFolder;
+		this.setBasedir(packageFolder.getPath());
 	}
 
 	/**
@@ -154,6 +155,17 @@ public class JavaFile extends FileModel {
 	 */
 	public void setImportClass(List<String> importClass) {
 		this.importClass = importClass;
+	}
+
+	/**
+	 * <code>getExtension</code>
+	 * 
+	 * @return
+	 * @since 2013-8-2 wangjunming
+	 */
+	@Override
+	public String getExtension() {
+		return ".java";
 	}
 
 	public SourceFolder getSourceFolder() {
