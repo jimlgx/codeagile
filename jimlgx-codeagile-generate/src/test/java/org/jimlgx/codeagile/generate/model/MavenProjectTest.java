@@ -8,10 +8,9 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.jimlgx.codeagile.generate.util.GenerateUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,18 +36,17 @@ public class MavenProjectTest {
 
 		MavenProject project = new MavenProject();
 
-		project.setBasedir(GenerateUtils.getUserDir());
+		// project.setBasedir(GenerateUtils.getUserDir());
+		project.setBasedir("target");
 
 		project.setArtifactId("jimlgx-codeagile-demo");
-		project.setCode(project.getArtifactId());
+		project.setCode("base/demo");
 
-		List<SourceFolder> sourceFolders = SourceFolder
-
-		.mavenSourceFolders(project.getBasedir() + project.getCode());
-
+		Map<String, SourceFolder> sourceFolders = SourceFolder
+				.mapMavenSourceFolders(project.getBasedir() + project.getCode());
 		project.setSourceFolders(sourceFolders);
 
-		List<FileModel> fileModels = new ArrayList<FileModel>();
+		Map<String, FileModel> fileModels = new HashMap<String, FileModel>();
 
 		project.setFileModels(fileModels);
 		// project.defaultFloder();

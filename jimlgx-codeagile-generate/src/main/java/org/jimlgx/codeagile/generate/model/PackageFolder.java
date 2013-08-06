@@ -8,7 +8,14 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import hidden.org.codehaus.plexus.interpolation.util.StringUtils;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.jimlgx.codeagile.generate.util.GenerateUtils;
+import org.springframework.util.CollectionUtils;
 
 /**
  * <code>PackageFolder</code>
@@ -17,7 +24,7 @@ import java.util.List;
  * @author wangjunming
  * @since 1.0 2013-4-14
  */
-public class PackageFolder extends Folder implements Package {
+public class PackageFolder extends Folder {
 
 	/**
 	 * long serialVersionUID :
@@ -37,7 +44,31 @@ public class PackageFolder extends Folder implements Package {
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	private List<JavaFile> javaFiles;
+	private List<JavaFile> javaFiles = new ArrayList<JavaFile>();
+
+	/**
+	 * 
+	 */
+	public PackageFolder() {
+		super();
+	}
+
+	/**
+	 * @param code
+	 */
+	public PackageFolder(String code) {
+		super(code);
+	}
+
+	public PackageFolder(PackageFolder parent, String code) {
+
+		super(parent.getCode() + "." + code);
+
+		// 设置 basedir
+		this.setBasedir(parent.getBasedir());
+		this.setSourceFolder(parent.getSourceFolder());
+
+	}
 
 	/**
 	 * <code>getJavaFiles</code>
@@ -70,6 +101,12 @@ public class PackageFolder extends Folder implements Package {
 	 */
 	public void setJavaFiles(List<JavaFile> javaFiles) {
 		this.javaFiles = javaFiles;
+
+		if (!CollectionUtils.isEmpty(this.javaFiles)) {
+			for (JavaFile javaFile : this.javaFiles) {
+				javaFile.setPackageFolder(this);
+			}
+		}
 	}
 
 	/**
@@ -78,11 +115,38 @@ public class PackageFolder extends Folder implements Package {
 	 * @since 2013-4-11 wangjunming
 	 */
 	public void generate() {
-		// TODO Auto-generated method stub
-		logger.debug("{} generate", this);
+		logger.debug("generate {} ", this.getPath());
+		generatePacakgeFolder();
 		for (JavaFile javaFile : javaFiles) {
 			javaFile.generate();
 		}
+	}
+
+	/**
+	 * <code>getPath</code>
+	 * 
+	 * 返回 package名称对应的目录文件结构
+	 * 
+	 * @return
+	 * @since 2013-8-2 wangjunming
+	 */
+	@Override
+	public String getPath() {
+
+		String folderCode = ModuleUtils.buildFolderCode(this.getCode());
+
+		return getBasedir() + folderCode;
+	}
+
+	/**
+	 * <code>generatePacakgeFolder</code>
+	 * 
+	 * @since 2013-8-2 wangjunming
+	 */
+	private void generatePacakgeFolder() {
+
+		GenerateUtils.createFileDirectory(new File(getPath()));
+
 	}
 
 }

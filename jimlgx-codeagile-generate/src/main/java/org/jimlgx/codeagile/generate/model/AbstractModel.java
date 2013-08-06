@@ -9,9 +9,11 @@
 package org.jimlgx.codeagile.generate.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -64,6 +66,65 @@ public class AbstractModel implements Serializable {
 	 * @since 2013-7-11 wangjunming
 	 */
 	private String comment;
+
+	/**
+	 * String creator :创建者
+	 * 
+	 * @since 2013-7-30 wangjunming
+	 */
+	private String creator;
+	/**
+	 * Date createTime :创建时间
+	 * 
+	 * @since 2013-7-30 wangjunming
+	 */
+	private Date createTime = new Date();
+
+	/**
+	 * @return the creator
+	 */
+	public String getCreator() {
+		return creator;
+	}
+
+	/**
+	 * @param creator
+	 *            the creator to set
+	 */
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+	/**
+	 * @return the createTime
+	 */
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	/**
+	 * <code>getDate</code>
+	 * 
+	 * 获得日期
+	 * 
+	 * @return
+	 * @since 2013-7-30 wangjunming
+	 */
+	public String getDate() {
+		return DateFormatUtils.format(getCreateTime(), "yyyy-MM-dd");
+	}
+
+	public String getDateTime() {
+		return DateFormatUtils.format(getCreateTime(), "yyyy-MM-dd HH:mm:ss");
+	}
+
+	/**
+	 * @param createTime
+	 *            the createTime to set
+	 */
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
 	/**
 	 * @return the comment

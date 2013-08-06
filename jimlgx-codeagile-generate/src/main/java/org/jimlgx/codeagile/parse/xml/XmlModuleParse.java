@@ -8,13 +8,23 @@
  */
 package org.jimlgx.codeagile.parse.xml;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.dom4j.Element;
+import org.jimlgx.codeagile.generate.model.DomainGenerate;
+import org.jimlgx.codeagile.generate.model.DomainGenerateMVC;
 import org.jimlgx.codeagile.generate.model.DomainModel;
-import org.jimlgx.codeagile.generate.model.MavenModule;
+import org.jimlgx.codeagile.generate.model.MVCModule;
+import org.jimlgx.codeagile.generate.model.ModuleUtils;
 import org.jimlgx.codeagile.parse.ParseUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 /**
  * <code>XmlModuleParse</code>
@@ -24,6 +34,7 @@ import org.jimlgx.codeagile.parse.ParseUtils;
  * @since 1.0 2013-7-26
  */
 public class XmlModuleParse extends AbstractParse {
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * 
@@ -45,20 +56,20 @@ public class XmlModuleParse extends AbstractParse {
 	 * @return
 	 * @since 2013-7-23 wangjunming
 	 */
-	public List<MavenModule> parse() {
+	public List<MVCModule> parse() {
 
 		if (getElement() != null) {
 
 			@SuppressWarnings("unchecked")
 			List<Element> itr = getElement().selectNodes("//modules//module");
-			List<MavenModule> module = new ArrayList<MavenModule>(itr.size());
+			List<MVCModule> modules = new ArrayList<MVCModule>(itr.size());
 
 			for (Element moduleElement : itr) {
-				MavenModule project = parseMavenModule(moduleElement);
+				MVCModule module = parseMVCModule(moduleElement);
 
-				module.add(project);
+				modules.add(module);
 			}
-			return module;
+			return modules;
 		}
 		return null;
 	}
@@ -70,13 +81,56 @@ public class XmlModuleParse extends AbstractParse {
 	 * @return
 	 * @since 2013-7-26 wangjunming
 	 */
-	protected MavenModule parseMavenModule(Element moduleElement) {
-		MavenModule module = new MavenModule();
+	protected MVCModule parseMVCModule(Element moduleElement) {
+		MVCModule module = new MVCModule();
 		ParseUtils.parseAttributeValue(moduleElement, module, "name",
 				"parseType", "pdm", "code", "version");
 
 		parseDomainModels(moduleElement, module);
+		parseGenerates(moduleElement, module);
+
 		return module;
+	}
+
+	/**
+	 * <code>parseGenerates</code>
+	 * 
+	 * @param moduleElement
+	 * @param module
+	 * @since 2013-8-2 wangjunming
+	 */
+	private void parseGenerates(Element moduleElement, MVCModule module) {
+
+		List<Element> itr = getElement().selectNodes("//generates//bean");
+		if (CollectionUtils.isEmpty(itr)) {
+			// 添加默认的 生成器
+			module.setDomainGenerates(Arrays.asList(new DomainGenerateMVC(
+					module)));
+
+		} else {
+			// 解析配置好的生成器
+			List<DomainGenerate> generates = new ArrayList<DomainGenerate>(
+					itr.size());
+			for (Element element : itr) {
+				String generate = element.attributeValue("name");
+				if ("mvc".equalsIgnoreCase(generate)) {
+					generates.add(new DomainGenerateMVC(module));
+				} else {
+					DomainGenerate generate2 = ModuleUtils
+							.reflectionNewInstance(module, generate);
+					if (generate2 != null) {
+						generates.add(generate2);
+					}
+				}
+			}
+
+			if (!CollectionUtils.isEmpty(generates)) {
+				module.setDomainGenerates(generates);
+			} else {
+				logger.warn("config generate is error");
+			}
+		}
+
 	}
 
 	/**
@@ -86,7 +140,7 @@ public class XmlModuleParse extends AbstractParse {
 	 * @param module
 	 * @since 2013-7-29 wangjunming
 	 */
-	protected void parseDomainModels(Element moduleElement, MavenModule module) {
+	protected void parseDomainModels(Element moduleElement, MVCModule module) {
 		try {
 			XmlDomainParse domainParse = new XmlDomainParse(moduleElement);
 			List<DomainModel> domains = domainParse.parse();

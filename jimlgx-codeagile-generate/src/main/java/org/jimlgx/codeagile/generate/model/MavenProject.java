@@ -8,11 +8,12 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.maven.model.Parent;
-import org.jimlgx.codeagile.generate.util.GenerateUtils;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -44,7 +45,7 @@ public class MavenProject extends Folder implements Project {
 	/**
 	 * The current version of the artifact produced by this project.
 	 */
-	private String version;
+	private String version = "1.0";
 
 	/**
 	 * 
@@ -82,39 +83,33 @@ public class MavenProject extends Folder implements Project {
 	 */
 	private String groupId;
 	/**
-	 * SourceFolder sourceFolders :源码目录
+	 * Map<String,SourceFolder> sourceFolders :源码目录
 	 * 
-	 * @since 2013-7-14 wangjunming
+	 * @since 2013-7-31 wangjunming
 	 */
-	private List<SourceFolder> sourceFolders;
+	private Map<String, SourceFolder> sourceFolders = new HashMap<String, SourceFolder>(
+			4);
 
 	/**
-	 * List<Package> packages :
-	 * 
-	 * 包结构
+	 * List<MVCModule> modules :功能模块
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	private List<Package> packages;
+	private List<MVCModule> modules = new ArrayList<MVCModule>(0);
 
 	/**
-	 * List<MavenModule> modules :
 	 * 
-	 * @since 2013-7-14 wangjunming
 	 */
-	private List<MavenModule> modules;
+	public MavenProject() {
+		super();
+	}
+
 	/**
-	 * List<Folder> folders : 文件夹
-	 * 
-	 * @since 2013-7-14 wangjunming
+	 * @param code
 	 */
-	private List<Folder> folders;
-	/**
-	 * List<FileModel> fileModels : 文件对象
-	 * 
-	 * @since 2013-7-14 wangjunming
-	 */
-	private List<FileModel> fileModels;
+	public MavenProject(String code) {
+		super(code);
+	}
 
 	/**
 	 * @return the modelVersion
@@ -207,24 +202,9 @@ public class MavenProject extends Folder implements Project {
 	}
 
 	/**
-	 * @return the packages
-	 */
-	public List<Package> getPackages() {
-		return packages;
-	}
-
-	/**
-	 * @param packages
-	 *            the packages to set
-	 */
-	public void setPackages(List<Package> packages) {
-		this.packages = packages;
-	}
-
-	/**
 	 * @return the modules
 	 */
-	public List<MavenModule> getModules() {
+	public List<MVCModule> getModules() {
 		return modules;
 	}
 
@@ -232,68 +212,32 @@ public class MavenProject extends Folder implements Project {
 	 * @param modules
 	 *            the modules to set
 	 */
-	public void setModules(List<MavenModule> modules) {
+	public void setModules(List<MVCModule> modules) {
 		this.modules = modules;
-	}
 
-	/**
-	 * @return the sourceFolder
-	 */
-	public List<SourceFolder> getSourceFolders() {
-//
-//		if (CollectionUtils.isEmpty(sourceFolders)) {
-//
-//			this.sourceFolders = SourceFolder.mavenSourceFolder(this
-//					.getBasedir() + this.getCode());
-//
-//		}
-
-		return sourceFolders;
-	}
-
-	/**
-	 * @return the folders
-	 */
-	public List<Folder> getFolders() {
-		return folders;
-	}
-
-	/**
-	 * @param folders
-	 *            the folders to set
-	 */
-	public void setFolders(List<Folder> folders) {
-		this.folders = folders;
-		for (Folder folder : folders) {
-			folder.setBasedir(this.getPath());
+		for (MVCModule mvcModule : this.modules) {
+			mvcModule.setProject(this);
 		}
 	}
 
 	/**
-	 * @return the fileModels
+	 * @return the sourceFolders
 	 */
-	public List<FileModel> getFileModels() {
-		return fileModels;
-	}
-
-	/**
-	 * @param fileModels
-	 *            the fileModels to set
-	 */
-	public void setFileModels(List<FileModel> fileModels) {
-		this.fileModels = fileModels;
+	public Map<String, SourceFolder> getSourceFolders() {
+		return sourceFolders;
 	}
 
 	/**
 	 * @param sourceFolders
 	 *            the sourceFolders to set
 	 */
-	public void setSourceFolders(List<SourceFolder> sourceFolders) {
+	public void setSourceFolders(Map<String, SourceFolder> sourceFolders) {
 		this.sourceFolders = sourceFolders;
-		for (SourceFolder sourceFolder : sourceFolders) {
-			sourceFolder.setBasedir(this.getPath());
-
+		for (Map.Entry<String, SourceFolder> entry : this.getSourceFolders()
+				.entrySet()) {
+			entry.getValue().setProject(this);
 		}
+
 	}
 
 	/**
@@ -302,35 +246,42 @@ public class MavenProject extends Folder implements Project {
 	 * @since 2013-4-11 wangjunming
 	 */
 	public void generate() {
- 
+
 		logger.debug("generate artifactId : {} ", this.getArtifactId());
 
 		generateFolder();
-		// this.getf
 
-		if (!CollectionUtils.isEmpty(getFileModels())) {
-			for (FileModel fileModel : getFileModels()) {
-				fileModel.generate();
-			}
-		} else {
-			logger.debug("empty fileModels artifactId :{}",
-					this.getArtifactId());
+		generateSourceFolders();
+
+		generateFileModels();
+
+		generateModules();
+	}
+
+	/**
+	 * <code>generateModules</code>
+	 * 
+	 * @since 2013-7-30 wangjunming
+	 */
+	private void generateModules() {
+		List<MVCModule> modules = getModules();
+
+		for (MVCModule mavenModule : modules) {
+			mavenModule.generate();
 		}
 	}
 
 	/**
-	 * <code>generateFolder</code>
+	 * <code>generateSourceFolders</code>
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	@Override
-	public void generateFolder() {
- 
-		GenerateUtils.createFileDirectory(new File(getPath()));
+	protected void generateSourceFolders() {
 
 		if (!CollectionUtils.isEmpty(this.getSourceFolders())) {
-			for (SourceFolder sourceFolder : this.getSourceFolders()) {
-				sourceFolder.generate();
+			for (Map.Entry<String, SourceFolder> entry : this
+					.getSourceFolders().entrySet()) {
+				entry.getValue().generate();
 			}
 		} else {
 
@@ -338,13 +289,6 @@ public class MavenProject extends Folder implements Project {
 					this.getArtifactId());
 		}
 
-		if (!CollectionUtils.isEmpty(this.getFolders())) {
-			for (Folder folder : this.getFolders()) {
-				folder.generate();
-			}
-		} else {
-			logger.debug("empty folders artifactId :{}", this.getArtifactId());
-		}
 	}
- 
+
 }

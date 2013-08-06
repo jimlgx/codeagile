@@ -8,8 +8,10 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.jimlgx.codeagile.generate.Generate;
 
 /**
  * <code>SourceFolder</code>
@@ -28,8 +30,42 @@ public class SourceFolder extends Folder {
 	 * @since 2013-7-14 wangjunming
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final String MAIN_JAVA = "src/main/java";
+	public static final String MAIN_RESOURCES = "src/main/resources";
+	public static final String MAIN_WEBAPP = "src/main/webapp";
+	public static final String TEST_JAVA = "src/test/java";
+	public static final String TEST_RESOURCES = "src/test/resources";
+
+	/**
+	 * MavenProject project :
+	 * 
+	 * @since 2013-7-30 wangjunming
+	 */
+	private MavenProject project;
+
+	/**
+	 * Map<String,PackageFolder> packages :
+	 * 
+	 * @since 2013-7-31 wangjunming
+	 */
+	private Map<String, PackageFolder> packages = new HashMap<String, PackageFolder>();
 
 	public SourceFolder() {
+	}
+
+	/**
+	 * @return the project
+	 */
+	public MavenProject getProject() {
+		return project;
+	}
+
+	/**
+	 * @param project
+	 *            the project to set
+	 */
+	public void setProject(MavenProject project) {
+		this.project = project;
 	}
 
 	/**
@@ -49,23 +85,73 @@ public class SourceFolder extends Folder {
 	}
 
 	/**
-	 * <code>mavenSourceFolders</code>
+	 * <code>setPackages</code>
+	 * 
+	 * @param packages
+	 * @since 2013-7-31 wangjunming
+	 */
+	public void setPackages(Map<String, PackageFolder> packages) {
+
+		this.packages = packages;
+
+		for (PackageFolder folder : getPackages().values()) {
+			folder.setBasedir(getPath());
+		}
+	}
+
+	/**
+	 * @return the packages
+	 */
+	public Map<String, PackageFolder> getPackages() {
+		return packages;
+	}
+
+	/**
+	 * <code>generate</code>
+	 * 
+	 * @since 2013-8-2 wangjunming
+	 */
+	@Override
+	public void generate() {
+
+		super.generate();
+
+		for (PackageFolder folder : getPackages().values()) {
+			folder.generate();
+		}
+	}
+
+	/**
+	 * <code>mapMavenSourceFolders</code>
 	 * 
 	 * 默认的mavne源码包结构
 	 * 
 	 * @return
 	 * @since 2013-7-17 wangjunming
 	 */
- 
-	public static List<SourceFolder> mavenSourceFolders(String basedir) {
+	public static Map<String, SourceFolder> mapMavenSourceFolders(String basedir) {
 
-		List<SourceFolder> list = new ArrayList<SourceFolder>();
+		Map<String, SourceFolder> map = new HashMap<String, SourceFolder>(5);
 
-		list.add(new SourceFolder("src/main/java", basedir));
-		list.add(new SourceFolder("src/main/resources", basedir));
-		list.add(new SourceFolder("src/test/java", basedir));
-		list.add(new SourceFolder("src/test/resources", basedir));
+		buildMap(map, MAIN_JAVA, basedir);
+		buildMap(map, MAIN_RESOURCES, basedir);
+		buildMap(map, MAIN_WEBAPP, basedir);
+		buildMap(map, TEST_JAVA, basedir);
+		buildMap(map, TEST_RESOURCES, basedir);
 
-		return list;
+		return map;
+	}
+
+	/**
+	 * <code>buildMap</code>
+	 * 
+	 * @param map
+	 * @param code
+	 * @param basedir
+	 * @since 2013-7-31 wangjunming
+	 */
+	private static void buildMap(Map<String, SourceFolder> map, String code,
+			String basedir) {
+		map.put(code, new SourceFolder(code, basedir));
 	}
 }
