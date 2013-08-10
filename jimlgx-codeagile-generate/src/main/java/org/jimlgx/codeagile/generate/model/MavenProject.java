@@ -279,9 +279,8 @@ public class MavenProject extends Folder implements Project {
 	protected void generateSourceFolders() {
 
 		if (!CollectionUtils.isEmpty(this.getSourceFolders())) {
-			for (Map.Entry<String, SourceFolder> entry : this
-					.getSourceFolders().entrySet()) {
-				entry.getValue().generate();
+			for (SourceFolder folder : this.getSourceFolders().values()) {
+				folder.generate();
 			}
 		} else {
 

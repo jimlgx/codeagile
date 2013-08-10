@@ -5,5 +5,27 @@
 	<artifactId>${artifactId}</artifactId>
 	<version>${version}</version>
 	<dependencies>
+		<dependency>
+			<groupId>org.jimlgx.showcase</groupId>
+			<artifactId>jimlgx-showcase-entity</artifactId>
+			<version>0.1.2-build201307-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
 </project>

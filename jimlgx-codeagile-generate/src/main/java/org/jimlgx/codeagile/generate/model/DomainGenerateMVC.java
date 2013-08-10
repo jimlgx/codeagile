@@ -8,7 +8,6 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
-import java.util.List;
 import java.util.Map;
 
 import org.jimlgx.codeagile.generate.MvcConstants;
@@ -99,7 +98,8 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 			PackageFolder pFolder = pfEntry.getValue();
 
 			if (MVC_MODEL.equals(key)) {
-				buildJavaFile(domainModel.getCode(), DefaultTemplate.MVC.Dao,
+				JavaDomainFile javaDomainFile = buildJavaFile(
+						domainModel.getCode(), DefaultTemplate.MVC.Model,
 						domainModel, pFolder);
 
 				PropertiesFile propertiesFile = ModuleUtils
@@ -108,21 +108,46 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 				pFolder.getFileModels().put(propertiesFile.getCode(),
 						propertiesFile);
 				propertiesFile.setPackageFolder(pFolder);
+
+				setExtendsClassifNull(javaDomainFile, "EntityLongImpl");
+
 			} else if (MVC_DAO.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "Dao",
-						DefaultTemplate.MVC.Dao, domainModel, pFolder);
+				JavaDomainFile javaDomainFile = buildJavaFile(
+						domainModel.getCode() + "Dao", DefaultTemplate.MVC.Dao,
+						domainModel, pFolder);
+				setExtendsClassifNull(javaDomainFile, "EntityDaoSupport");
+
 			} else if (MVC_SERVICE.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "Service",
+				JavaDomainFile javaDomainFile = buildJavaFile(
+						domainModel.getCode() + "Service",
 						DefaultTemplate.MVC.Service, domainModel, pFolder);
+				setExtendsClassifNull(javaDomainFile, "EntityManagerSupport");
 			} else if (MVC_WEB.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "Action",
+				JavaDomainFile javaDomainFile = buildJavaFile(
+						domainModel.getCode() + "Action",
 						DefaultTemplate.MVC.Action, domainModel, pFolder);
+				setExtendsClassifNull(javaDomainFile, "JsonEntityActionSupport");
 			} else if (MVC_MANAGER.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "Manager",
+
+				JavaDomainFile javaDomainFile = buildJavaFile(
+						domainModel.getCode() + "Manager",
 						DefaultTemplate.MVC.Manager, domainModel, pFolder);
+				setExtendsClassifNull(javaDomainFile, "EntityManagerSupport");
 			}
 
 		}
+	}
+
+	/**
+	 * <code>setExtendsClassifNull</code>
+	 * 
+	 * @param javaDomainFile
+	 * @param string
+	 * @since 2013-8-10 wangjunming
+	 */
+	private void setExtendsClassifNull(JavaDomainFile javaDomainFile,
+			String string) {
+		javaDomainFile.setExtendsClass(string);
 	}
 
 	/**
@@ -177,17 +202,30 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 	 * @param pFolder
 	 * @since 2013-7-31 wangjunming
 	 */
-	protected void buildJavaFile(String code, String template,
+	protected JavaDomainFile buildJavaFile(String code, String template,
 			DomainModel domainModel, PackageFolder pFolder) {
 		JavaDomainFile javaDomainFile = new JavaDomainFile(domainModel);
+		javaDomainFile.setModule(mvcModule);
+
 		javaDomainFile.setCode(code);
 
 		// 设置模板
 		javaDomainFile.setTemplate(template);
 		javaDomainFile.setExtension(".java");
+
+		// 添加泛型类型名称
+		javaDomainFile.setParamT(domainModel.getCode());
+		javaDomainFile.setParamD(domainModel.getCode() + "Dao");
+		javaDomainFile.setParamM(domainModel.getCode() + "Manager");
+		javaDomainFile.setParamS(domainModel.getCode() + "Service");
+		javaDomainFile.setModulePackage(this.mvcModule.getPackageFolder()
+				.getCode());
+
 		// 建立双向关系
 		javaDomainFile.setPackageFolder(pFolder);
 		pFolder.getJavaFiles().add(javaDomainFile);
+
+		return javaDomainFile;
 	}
 
 	/**
@@ -204,6 +242,7 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 		for (Map.Entry<String, SourceFolder> sfEntry : sourceFolders.entrySet()) {
 			if (SourceFolder.MAIN_JAVA.equals(sfEntry.getKey())) {
 				SourceFolder sourceFolder = sfEntry.getValue();
+
 				buildMainJavaFile(domainModel, sourceFolder);
 			} else if (SourceFolder.TEST_JAVA.equals(sfEntry.getKey())) {
 				SourceFolder sourceFolder = sfEntry.getValue();

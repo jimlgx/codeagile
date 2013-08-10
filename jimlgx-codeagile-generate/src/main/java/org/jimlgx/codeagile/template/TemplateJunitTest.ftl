@@ -20,7 +20,7 @@ import org.junit.Test;
  */
 public class ${simpleName} extends AbstractTestCase{
 	//测试的类
-	${testClassField};
+	//${testClassField};
 	
 	/**
      * <code>test1</code>

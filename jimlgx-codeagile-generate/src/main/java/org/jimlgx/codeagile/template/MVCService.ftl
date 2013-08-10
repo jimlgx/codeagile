@@ -24,6 +24,6 @@ import ${modulePackage}.dao.${paramD};
  */
 @Transactional
 @Service("${packages}.${simpleName}")
-${modifiers}  class ${simpleName}  extends AbstractService<${paramT},${paramD}>  {
+${modifiers}  class ${simpleName}  extends ${extendsClass}<${paramT},${paramID},${paramD}>  {
 	//TODO 添加${simpleName}该模型的属性和方法或者覆盖父类的方法
 }

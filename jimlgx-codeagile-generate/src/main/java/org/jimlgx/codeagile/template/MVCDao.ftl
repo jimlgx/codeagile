@@ -21,6 +21,6 @@ import ${modulePackage}.model.${paramT};
  * @since    ${version} ${date}
  */
  @Repository("${packages}.${simpleName}")
-${modifiers}  class ${simpleName}  extends AbstractDao<${paramT}>  {
+${modifiers}  class ${simpleName}  extends ${extendsClass}<${paramT},${paramID}>  {
 	//TODO 添加${simpleName}该模型的属性和方法或者覆盖父类的方法
 }

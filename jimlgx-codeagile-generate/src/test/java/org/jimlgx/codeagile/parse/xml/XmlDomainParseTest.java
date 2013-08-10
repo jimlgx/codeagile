@@ -8,9 +8,12 @@
  */
 package org.jimlgx.codeagile.parse.xml;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.dom4j.DocumentException;
+import org.jimlgx.codeagile.generate.model.DomainModel;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +26,9 @@ import org.slf4j.LoggerFactory;
  * @since 1.0 2013-7-22
  */
 public class XmlDomainParseTest {
-	Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	XmlDomainParse parse = null;
+	protected XmlDomainParse parse = null;
 
 	/**
 	 * <code>testparseDomains</code>

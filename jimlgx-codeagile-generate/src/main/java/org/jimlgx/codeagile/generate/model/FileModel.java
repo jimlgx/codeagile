@@ -55,6 +55,114 @@ public class FileModel extends Folder implements Generate {
 	protected String extension = StringUtils.EMPTY;
 
 	/**
+	 * String author :
+	 * 
+	 * @since 2013-8-10 wangjunming
+	 */
+	protected String author = StringUtils.EMPTY;
+	/**
+	 * String version :版本号
+	 * 
+	 * @since 2013-8-10 wangjunming
+	 */
+	protected String version = "1.0";
+
+	/**
+	 * String description :描述
+	 * 
+	 * @since 2013-8-10 wangjunming
+	 */
+	protected String description = StringUtils.EMPTY;
+	protected String copyRight = StringUtils.EMPTY;
+	protected String projectName = StringUtils.EMPTY;
+	protected String fileName = StringUtils.EMPTY;
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description
+	 *            the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the copyRight
+	 */
+	public String getCopyRight() {
+		return copyRight;
+	}
+
+	/**
+	 * @param copyRight
+	 *            the copyRight to set
+	 */
+	public void setCopyRight(String copyRight) {
+		this.copyRight = copyRight;
+	}
+
+	/**
+	 * @return the projectName
+	 */
+	public String getProjectName() {
+		return projectName;
+	}
+
+	/**
+	 * @param projectName
+	 *            the projectName to set
+	 */
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	/**
+	 * @return the fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+
+	/**
+	 * @param fileName
+	 *            the fileName to set
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	/**
+	 * 
+	 */
+	public FileModel() {
+		super();
+	}
+
+	/**
+	 * @param code
+	 */
+	public FileModel(String code) {
+		super(code);
+	}
+
+	/**
+	 * @param code
+	 *            文件名
+	 * @param template
+	 *            模板
+	 */
+	public FileModel(String code, String template) {
+		super(code);
+		this.template = template;
+	}
+
+	/**
 	 * @return the extension
 	 */
 	public String getExtension() {
@@ -88,28 +196,33 @@ public class FileModel extends Folder implements Generate {
 	}
 
 	/**
-	 * 
+	 * @return the author
 	 */
-	public FileModel() {
-		super();
+	public String getAuthor() {
+		return author;
 	}
 
 	/**
-	 * @param code
+	 * @param author
+	 *            the author to set
 	 */
-	public FileModel(String code) {
-		super(code);
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	/**
-	 * @param code
-	 *            文件名
-	 * @param template
-	 *            模板
+	 * @return the version
 	 */
-	public FileModel(String code, String template) {
-		super(code);
-		this.template = template;
+	public String getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version
+	 *            the version to set
+	 */
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	/**
@@ -118,7 +231,7 @@ public class FileModel extends Folder implements Generate {
 	 * @since 2013-4-11 wangjunming
 	 */
 	public void generate() {
-		logger.debug("{} generate", this);
+		logger.debug("{} generate", this.getPath());
 		Object object = this;
 		generate(object);
 	}

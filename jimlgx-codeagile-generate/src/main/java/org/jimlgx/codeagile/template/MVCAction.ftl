@@ -25,7 +25,7 @@ import ${modulePackage}.service.${paramM};
  */
 @Controller("${packages}.${simpleName}")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-${modifiers}  class ${simpleName}  extends AbstractAction<${paramT},${paramM}>  {
+${modifiers}  class ${simpleName}  extends ${extendsClass}<${paramT},${paramID},${paramS}>  {
 	private static final long serialVersionUID = 1L;
 	//TODO 添加${simpleName}该模型的属性和方法或者覆盖父类的方法
 }

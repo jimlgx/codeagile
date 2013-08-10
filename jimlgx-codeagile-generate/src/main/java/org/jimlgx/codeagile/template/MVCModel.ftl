@@ -27,29 +27,29 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * @since    ${version} ${date}
  */
 @Entity
-@Table(name = "t_${moduleNameTable}_${simpleName}")
+@Table(name = "t_${module.code}_${simpleName}")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 ${modifiers} class ${simpleName} extends ${extendsClass}  {
 	private static final long serialVersionUID = 1L;
 	//TODO 添加${simpleName}该模型的属性和方法或者覆盖父类的方法
 	
 	//	
-	<#list fileds as filed>
+	<#list fields as field>
 	/**
-	 * ${filed.name} 标志  值="${filed.value}" 
+	 * ${field.name} 标志  值="${field.code}" 
 	 * 
 	 * @since ${date} ${author}
 	 */
-	public static final String ${filed.valueUpperCase} = "${filed.value}";
+	public static final String ${field.codeUpperCase} = "${field.code}";
 	</#list>
 	
-	<#list fileds as filed>
+	<#list fields as field>
 	/**
-	 * ${filed.type} ${filed.value} : ${filed.name}
-	 * ${filed.description}
+	 * ${field.javaType} ${field.code} : ${field.name}
+	 * ${field.description}
 	 * @since ${date} ${author}
 	 */
-	private ${filed.type} ${filed.value};
+	private ${field.javaType} ${field.code};
 	
 	</#list>
 	
@@ -63,29 +63,29 @@ ${modifiers} class ${simpleName} extends ${extendsClass}  {
 	/**
 	 * @param id
 	 */
-	public ${simpleName}(Serializable id) {
+	public ${simpleName}(Long id) {
 		super(id);
 	}
 	
-	<#list fileds as filed>
+	<#list fields as field>
 	/**
-	 * <code>get${filed.valueHump}</code>  ${filed.name}
-	 * ${filed.description}
-	 * @return ${filed.type}
+	 * <code>get${field.codeHump}</code>  ${field.name}
+	 * ${field.description}
+	 * @return ${field.javaType}
 	 * @since ${date} ${author}
 	 */
-	public ${filed.type} get${filed.valueHump}() {
-		return this.${filed.value};
+	public ${field.javaType} get${field.codeHump}() {
+		return this.${field.code};
 	}
 
 	/**
-	 * <code>set${filed.valueHump}</code>
-	 * ${filed.name}  ${filed.description}
-	 * @param ${filed.value}
+	 * <code>set${field.codeHump}</code>
+	 * ${field.name}  ${field.description}
+	 * @param ${field.code}
 	 * @since ${date} ${author}
 	 */
-	public void set${filed.valueHump}(${filed.type} ${filed.value}) {
-		this.${filed.value} = ${filed.value};
+	public void set${field.codeHump}(${field.javaType} ${field.code}) {
+		this.${field.code} = ${field.code};
 	}
 
 	</#list>

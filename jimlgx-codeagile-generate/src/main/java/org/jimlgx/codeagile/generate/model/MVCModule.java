@@ -239,13 +239,26 @@ public class MVCModule extends Folder implements Generate, MvcConstants {
 	}
 
 	/**
+	 * <code>getPackageFolder</code>
+	 * 
+	 * 模块的包目录
+	 * 
+	 * @return
+	 * @since 2013-8-10 wangjunming
+	 */
+	public PackageFolder getPackageFolder() {
+		PackageFolder folder = ModuleUtils.createPackage(getProject(), this);
+		return folder;
+	}
+
+	/**
 	 * <code>buildFolders</code>
 	 * 
 	 * @since 2013-7-30 wangjunming
 	 */
 	protected Map<String, PackageFolder> buildPackages() {
 
-		PackageFolder folder = ModuleUtils.createPackage(getProject(), this);
+		PackageFolder folder = getPackageFolder();
 		Map<String, PackageFolder> packages = ModuleUtils
 				.createMVCPackages(folder);
 		return packages;

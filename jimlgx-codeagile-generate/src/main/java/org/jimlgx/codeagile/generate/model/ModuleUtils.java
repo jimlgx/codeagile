@@ -20,6 +20,7 @@ import java.util.Map;
 import org.apache.commons.lang3.ClassUtils;
 import org.jimlgx.codeagile.generate.MvcConstants;
 import org.jimlgx.codeagile.template.DefaultTemplate;
+import org.springframework.util.CollectionUtils;
 
 /**
  * <code>ModelUtils</code>
@@ -101,9 +102,11 @@ public class ModuleUtils implements MvcConstants {
 		PropertiesFile file = new PropertiesFile(code,
 				DefaultTemplate.PROPERTIES.field);
 		List<ModelField> fields = domainModel.getFields();
-		for (ModelField modelField : fields) {
-			file.getProperties()
-					.put(modelField.getCode(), modelField.getName());
+		if (!CollectionUtils.isEmpty(fields)) {
+			for (ModelField modelField : fields) {
+				file.getProperties().put(modelField.getCode(),
+						modelField.getName());
+			}
 		}
 		return file;
 	}
@@ -156,5 +159,43 @@ public class ModuleUtils implements MvcConstants {
 		}
 
 		return null;
+	}
+
+	/**
+	 * <code>standardizationSimpleName</code> 规范化类名 首字母大写 如 user ->User
+	 * 
+	 * @param simpleName
+	 * @return String
+	 * @since 2010-7-9 wangjunming
+	 */
+	public static String standardizationSimpleName(String simpleName) {
+		char[] charArray = simpleName.toCharArray();
+		String standard = null;
+		if (Character.isLowerCase(charArray[0])) {
+			charArray[0] = Character.toUpperCase(charArray[0]);
+			standard = new String(charArray);
+		} else {
+			standard = simpleName;
+		}
+		return standard;
+	}
+
+	/**
+	 * <code>standardizationObjecjtName</code> 规范化对象名称 类名该为首字母小写 如 User -> user
+	 * 
+	 * @param simpleName
+	 * @return String
+	 * @since 2010-7-9 wangjunming
+	 */
+	public static String standardizationObjecjtName(String simpleName) {
+		char[] charArray = simpleName.toCharArray();
+		String standard = null;
+		if (Character.isUpperCase(charArray[0])) {
+			charArray[0] = Character.toLowerCase(charArray[0]);
+			standard = new String(charArray);
+		} else {
+			standard = simpleName;
+		}
+		return standard;
 	}
 }

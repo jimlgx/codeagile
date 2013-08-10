@@ -8,6 +8,7 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jimlgx.codeagile.generate.Generate;
 
 /**
@@ -56,6 +57,18 @@ public class ModelField extends AbstractModel {
 	 */
 	private String javaType;
 	/**
+	 * String codeHump :驼峰命名
+	 * 
+	 * @since 2013-8-10 wangjunming
+	 */
+	private String codeHump;
+	/**
+	 * String codeUpperCase :静态常量标志
+	 * 
+	 * @since 2013-8-10 wangjunming
+	 */
+	private String codeUpperCase;
+	/**
 	 * Integer length :数据长度
 	 * 
 	 * @since 2013-7-11 wangjunming
@@ -67,6 +80,52 @@ public class ModelField extends AbstractModel {
 	 * @since 2013-7-11 wangjunming
 	 */
 	private boolean primaryKey;
+
+	/**
+	 * @return the valueHump
+	 */
+	public String getValueHump() {
+		if (StringUtils.isEmpty(this.codeHump)) {
+			return ModuleUtils.standardizationSimpleName(this.getCode());
+		}
+		return this.codeHump;
+	}
+
+	/**
+	 * @return the codeHump
+	 */
+	public String getCodeHump() {
+		if (StringUtils.isEmpty(this.codeHump)) {
+			return ModuleUtils.standardizationObjecjtName(this.getCode());
+		}
+		return codeHump;
+	}
+
+	/**
+	 * @param codeHump
+	 *            the codeHump to set
+	 */
+	public void setCodeHump(String codeHump) {
+		this.codeHump = codeHump;
+	}
+
+	/**
+	 * @return the codeUpperCase
+	 */
+	public String getCodeUpperCase() {
+		if (StringUtils.isEmpty(this.codeUpperCase)) {
+			return StringUtils.upperCase(this.getCode());
+		}
+		return codeUpperCase;
+	}
+
+	/**
+	 * @param codeUpperCase
+	 *            the codeUpperCase to set
+	 */
+	public void setCodeUpperCase(String codeUpperCase) {
+		this.codeUpperCase = codeUpperCase;
+	}
 
 	/**
 	 * 
@@ -164,5 +223,5 @@ public class ModelField extends AbstractModel {
 	public void setPrimaryKey(boolean primaryKey) {
 		this.primaryKey = primaryKey;
 	}
- 
+
 }

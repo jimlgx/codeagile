@@ -48,6 +48,12 @@ public class DomainModel extends AbstractModel {
 	 * @since 2013-7-11 wangjunming
 	 */
 	private String primaryKey;
+	/**
+	 * String extendsClass :继承类
+	 * 
+	 * @since 2013-8-10 wangjunming
+	 */
+	private String extendsClass = "EntityLongImpl";
 
 	/**
 	 * @return the primaryKey
@@ -62,6 +68,21 @@ public class DomainModel extends AbstractModel {
 	 */
 	public void setPrimaryKey(String primaryKey) {
 		this.primaryKey = primaryKey;
+	}
+
+	/**
+	 * @return the extendsClass
+	 */
+	public String getExtendsClass() {
+		return extendsClass;
+	}
+
+	/**
+	 * @param extendsClass
+	 *            the extendsClass to set
+	 */
+	public void setExtendsClass(String extendsClass) {
+		this.extendsClass = extendsClass;
 	}
 
 	/**

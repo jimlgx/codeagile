@@ -21,10 +21,10 @@ import com.zrtech.core.test.AbstractSpringTestCase;
  * @author   ${author}
  * @since    ${version} ${date}
  */
-${modifiers}  class ${simpleName} extends AbstractSpringTestCase {
+${modifiers}  class ${simpleName} extends AbstractStrutsSpringJUnit4TestCase {
 	//测试的类
-	@Autowired
-	${testClassField};
+	//@Autowired
+	//${testClassField};
 	
     /**
      * <code>test1</code>

@@ -11,6 +11,8 @@ package org.jimlgx.codeagile.generate.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * <code>JavaFile</code>
  * 
@@ -27,11 +29,11 @@ public class JavaFile extends FileModel {
 	private static final long serialVersionUID = 2602095103265813886L;
 
 	/**
-	 * String simpleNam :类名简称
+	 * String simpleName :类名简称
 	 * 
 	 * @since 2013-7-14 wangjunming
 	 */
-	private String simpleNam;
+	private String simpleName;
 
 	/**
 	 * String extendsClass :继承的类名
@@ -40,11 +42,11 @@ public class JavaFile extends FileModel {
 	 */
 	private String extendsClass;
 	/**
-	 * String modifier : 修饰符
+	 * String modifiers : 修饰符
 	 * 
 	 * @since 2013-7-19 wangjunming
 	 */
-	private String modifier;
+	private String modifiers = "public";
 
 	/**
 	 * List<String> implClass : 实现的接口
@@ -83,33 +85,36 @@ public class JavaFile extends FileModel {
 	}
 
 	/**
-	 * @return the modifier
+	 * @return the modifiers
 	 */
-	public String getModifier() {
-		return modifier;
+	public String getModifiers() {
+		return modifiers;
 	}
 
 	/**
-	 * @param modifier
-	 *            the modifier to set
+	 * @param modifiers
+	 *            the modifiers to set
 	 */
-	public void setModifier(String modifier) {
-		this.modifier = modifier;
+	public void setModifiers(String modifiers) {
+		this.modifiers = modifiers;
 	}
 
 	/**
-	 * @return the simpleNam
+	 * @return the simpleName
 	 */
-	public String getSimpleNam() {
-		return simpleNam;
+	public String getSimpleName() {
+		if (StringUtils.isEmpty(simpleName)) {
+			return this.getCode();
+		}
+		return simpleName;
 	}
 
 	/**
-	 * @param simpleNam
-	 *            the simpleNam to set
+	 * @param simpleName
+	 *            the simpleName to set
 	 */
-	public void setSimpleNam(String simpleNam) {
-		this.simpleNam = simpleNam;
+	public void setSimpleName(String simpleName) {
+		this.simpleName = simpleName;
 	}
 
 	/**
@@ -166,6 +171,19 @@ public class JavaFile extends FileModel {
 	@Override
 	public String getExtension() {
 		return ".java";
+	}
+
+	/**
+	 * <code>getPackages</code>
+	 * 
+	 * @return
+	 * @since 2013-8-10 wangjunming
+	 */
+	public String getPackages() {
+		if (this.getPackageFolder() != null) {
+			return getPackageFolder().getCode();
+		}
+		return StringUtils.EMPTY;
 	}
 
 	public SourceFolder getSourceFolder() {

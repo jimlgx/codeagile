@@ -19,6 +19,7 @@ import org.dom4j.io.SAXReader;
 import org.jimlgx.codeagile.generate.model.DomainModel;
 import org.jimlgx.codeagile.generate.model.ModelField;
 import org.jimlgx.codeagile.parse.DomainParse;
+import org.jimlgx.codeagile.parse.ParseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -94,14 +95,12 @@ public class XmlDomainParse extends AbstractParse implements DomainParse {
 	 */
 	protected DomainModel parseDomain(Element tableElement) {
 		DomainModel domain = new DomainModel();
-		String name = tableElement.attributeValue("name");
-		String description = tableElement.attributeValue("description");
-		String code = tableElement.attributeValue("code");
-		domain.setName(name);
-		domain.setDescription(description);
-		domain.setCode(code);
+		ParseUtils.parseAttributeValue(tableElement, domain, "name",
+				"description", "code", "extends");
+		
 		List<ModelField> fieldList = parseFields(tableElement);
 		domain.setFields(fieldList);
+
 		return domain;
 		// return null;
 	}
@@ -115,7 +114,7 @@ public class XmlDomainParse extends AbstractParse implements DomainParse {
 	 */
 	protected List<ModelField> parseFields(Element tableElement) {
 		@SuppressWarnings("unchecked")
-		List<Element> itr = tableElement.selectNodes("//models//model");
+		List<Element> itr = tableElement.selectNodes("//models//model//field");
 		List<ModelField> fields = new ArrayList<ModelField>(itr.size());
 
 		for (Element fieldElement : itr) {
@@ -135,16 +134,8 @@ public class XmlDomainParse extends AbstractParse implements DomainParse {
 
 	protected ModelField parseField(Element fieldElement) {
 		ModelField field = new ModelField();
-		String name = fieldElement.attributeValue("name");
-		String description = fieldElement.attributeValue("description");
-		String code = fieldElement.attributeValue("code");
-
-		String javaType = fieldElement.attributeValue("type");
-
-		field.setName(name);
-		field.setDescription(description);
-		field.setCode(code);
-		field.setJavaType(javaType);
+		ParseUtils.parseAttributeValue(fieldElement, field, "name",
+				"description", "code", "javaType");
 		return field;
 	}
 

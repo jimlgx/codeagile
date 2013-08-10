@@ -21,6 +21,6 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { })
-${modifiers}  class ${simpleName} extends AbstractSuiteTests {
+${modifiers}  class ${simpleName}  {
 	//
 }
