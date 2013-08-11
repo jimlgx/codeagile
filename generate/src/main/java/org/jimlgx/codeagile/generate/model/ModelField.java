@@ -9,7 +9,6 @@
 package org.jimlgx.codeagile.generate.model;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jimlgx.codeagile.generate.Generate;
 
 /**
  * <code>DomainField</code>

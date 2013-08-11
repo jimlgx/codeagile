@@ -168,28 +168,38 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 		for (Map.Entry<String, PackageFolder> pfEntry : packages.entrySet()) {
 			String key = pfEntry.getKey();
 			PackageFolder pFolder = pfEntry.getValue();
-
+			JavaTestFile javaTestFile = null;
 			if (MVC_MODEL.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "Test",
+				javaTestFile = buildJavaTestFile(
+						domainModel.getCode() + "Test",
 						DefaultTemplate.TESTCASE.TemplateSpringTest,
 						domainModel, pFolder);
-
+				javaTestFile.setTestClass(domainModel.getCode());
 			} else if (MVC_DAO.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "DaoTest",
+				javaTestFile = buildJavaTestFile(domainModel.getCode()
+						+ "DaoTest",
 						DefaultTemplate.TESTCASE.TemplateSpringTest,
 						domainModel, pFolder);
+				javaTestFile.setTestClass(domainModel.getCode() + "Dao");
 			} else if (MVC_SERVICE.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "ServiceTest",
+				javaTestFile = buildJavaTestFile(domainModel.getCode()
+						+ "ServiceTest",
 						DefaultTemplate.TESTCASE.TemplateSpringTest,
 						domainModel, pFolder);
+				javaTestFile.setTestClass(domainModel.getCode() + "Service");
 			} else if (MVC_WEB.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "ActionTest",
+				javaTestFile = buildJavaTestFile(domainModel.getCode()
+						+ "ActionTest",
 						DefaultTemplate.TESTCASE.TemplateSpringTest,
 						domainModel, pFolder);
+				javaTestFile.setTestClass(domainModel.getCode() + "Action");
 			} else if (MVC_MANAGER.equals(key)) {
-				buildJavaFile(domainModel.getCode() + "ManagerTest",
+				javaTestFile = buildJavaTestFile(domainModel.getCode()
+						+ "ManagerTest",
 						DefaultTemplate.TESTCASE.TemplateSpringTest,
 						domainModel, pFolder);
+				
+				javaTestFile.setTestClass(domainModel.getCode() + "Manager");
 			}
 
 		}
@@ -226,6 +236,42 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 		pFolder.getJavaFiles().add(javaDomainFile);
 
 		return javaDomainFile;
+	}
+
+	/**
+	 * <code>buildJavaTestFile</code>
+	 * 
+	 * @param code
+	 * @param template
+	 * @param domainModel
+	 * @param pFolder
+	 * @return
+	 * @since 2013-8-11 wangjunming
+	 */
+	protected JavaTestFile buildJavaTestFile(String code, String template,
+			DomainModel domainModel, PackageFolder pFolder) {
+		JavaTestFile javaTestFile = new JavaTestFile(domainModel);
+		javaTestFile.setModule(mvcModule);
+
+		javaTestFile.setCode(code);
+
+		// 设置模板
+		javaTestFile.setTemplate(template);
+		javaTestFile.setExtension(".java");
+
+		// 添加泛型类型名称
+		javaTestFile.setParamT(domainModel.getCode());
+		javaTestFile.setParamD(domainModel.getCode() + "Dao");
+		javaTestFile.setParamM(domainModel.getCode() + "Manager");
+		javaTestFile.setParamS(domainModel.getCode() + "Service");
+		javaTestFile.setModulePackage(this.mvcModule.getPackageFolder()
+				.getCode());
+
+		// 建立双向关系
+		javaTestFile.setPackageFolder(pFolder);
+		pFolder.getJavaFiles().add(javaTestFile);
+
+		return javaTestFile;
 	}
 
 	/**

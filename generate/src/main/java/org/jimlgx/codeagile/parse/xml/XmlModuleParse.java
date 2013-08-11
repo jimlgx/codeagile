@@ -8,13 +8,10 @@
  */
 package org.jimlgx.codeagile.parse.xml;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.dom4j.Element;
 import org.jimlgx.codeagile.generate.model.DomainGenerate;
 import org.jimlgx.codeagile.generate.model.DomainGenerateMVC;
@@ -22,8 +19,6 @@ import org.jimlgx.codeagile.generate.model.DomainModel;
 import org.jimlgx.codeagile.generate.model.MVCModule;
 import org.jimlgx.codeagile.generate.model.ModuleUtils;
 import org.jimlgx.codeagile.parse.ParseUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -34,7 +29,7 @@ import org.springframework.util.CollectionUtils;
  * @since 1.0 2013-7-26
  */
 public class XmlModuleParse extends AbstractParse {
-	protected Logger logger = LoggerFactory.getLogger(getClass());
+//	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * 

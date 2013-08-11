@@ -13,8 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javassist.bytecode.analysis.Util;
-
 import org.jimlgx.codeagile.template.DefaultTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +31,7 @@ import freemarker.template.TemplateExceptionHandler;
  * @since 1.0 2013-7-29
  */
 public class FreemarkerUtils {
-	private static Configuration cfg = null;
+	private static volatile Configuration cfg = null;
 	protected static Logger logger = LoggerFactory
 			.getLogger(FreemarkerUtils.class);
 

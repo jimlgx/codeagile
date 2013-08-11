@@ -8,8 +8,6 @@
  */
 package org.jimlgx.codeagile.generate.model;
 
-import hidden.org.codehaus.plexus.interpolation.util.StringUtils;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

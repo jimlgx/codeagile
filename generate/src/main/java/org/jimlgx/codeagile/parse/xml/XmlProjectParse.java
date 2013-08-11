@@ -8,14 +8,6 @@
  */
 package org.jimlgx.codeagile.parse.xml;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +20,6 @@ import org.jimlgx.codeagile.generate.model.MavenProject;
 import org.jimlgx.codeagile.generate.model.SourceFolder;
 import org.jimlgx.codeagile.parse.ParseUtils;
 import org.jimlgx.codeagile.parse.ProjectParse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * <code>XmlProjectParse</code>
@@ -40,7 +30,7 @@ import org.slf4j.LoggerFactory;
  */
 
 public class XmlProjectParse extends AbstractParse implements ProjectParse {
-	protected Logger logger = LoggerFactory.getLogger(getClass());
+//	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * 

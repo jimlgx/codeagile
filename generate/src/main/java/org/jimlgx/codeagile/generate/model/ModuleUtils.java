@@ -20,6 +20,8 @@ import java.util.Map;
 import org.apache.commons.lang3.ClassUtils;
 import org.jimlgx.codeagile.generate.MvcConstants;
 import org.jimlgx.codeagile.template.DefaultTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -30,6 +32,8 @@ import org.springframework.util.CollectionUtils;
  * @since 1.0 2013-8-1
  */
 public class ModuleUtils implements MvcConstants {
+	protected static Logger logger = LoggerFactory.getLogger(ModuleUtils.class);
+
 	/**
 	 * <code>createMVCPackages</code>
 	 * 
@@ -142,20 +146,26 @@ public class ModuleUtils implements MvcConstants {
 
 			return generate2;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-
+			// e.printStackTrace();
+			logger.warn(e.getMessage(), e);
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			logger.warn(e.getMessage(), e);
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			logger.warn(e.getMessage(), e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			logger.warn(e.getMessage(), e);
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			logger.warn(e.getMessage(), e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			logger.warn(e.getMessage(), e);
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			logger.warn(e.getMessage(), e);
 		}
 
 		return null;

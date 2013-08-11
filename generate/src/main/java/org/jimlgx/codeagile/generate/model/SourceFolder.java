@@ -11,8 +11,6 @@ package org.jimlgx.codeagile.generate.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jimlgx.codeagile.generate.Generate;
-
 /**
  * <code>SourceFolder</code>
  * 

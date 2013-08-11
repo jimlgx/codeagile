@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * @author wangjunming
  * @since 1.0 2013-7-11
  */
-public class PdmDomainParse  implements DomainParse {
+public class PdmDomainParse implements DomainParse {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	private Document document;
@@ -184,9 +184,8 @@ public class PdmDomainParse  implements DomainParse {
 					.selectNodes("//c:Keys//o:Key[@Id='"
 							+ keys_primarykey_ref_id + "']");
 
-			logger.info("list.size = {}", list.size());
-
 			if (list != null && list.size() > 0) {
+				logger.info("list.size = {}", list.size());
 				Element element = list.get(0);
 				String keys_column_ref = element.element("Key.Columns")
 						.element("Column").attributeValue("Ref");
