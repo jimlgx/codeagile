@@ -17,12 +17,12 @@ package org.jimlgx.codeagile.generate;
  */
 public interface Generate {
 
-	/**
-	 * <code>generate</code>
-	 * 
-	 * 生成程序相关文件
-	 * 
-	 * @since 2013-4-11 wangjunming
-	 */
-	public void generate();
+    /**
+     * <code>generate</code>
+     * 
+     * 生成程序相关文件
+     * 
+     * @since 2013-4-11 wangjunming
+     */
+    void generate();
 }

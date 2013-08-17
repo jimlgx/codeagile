@@ -32,7 +32,7 @@ import org.springframework.util.CollectionUtils;
  * @since 1.0 2013-8-1
  */
 public class ModuleUtils implements MvcConstants {
-	protected static Logger logger = LoggerFactory.getLogger(ModuleUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(ModuleUtils.class);
 
 	/**
 	 * <code>createMVCPackages</code>
@@ -104,7 +104,7 @@ public class ModuleUtils implements MvcConstants {
 
 		String code = domainModel.getCode() + "_zh_CN.properties";
 		PropertiesFile file = new PropertiesFile(code,
-				DefaultTemplate.PROPERTIES.field);
+				DefaultTemplate.PROPERTIES.FIELD);
 		List<ModelField> fields = domainModel.getFields();
 		if (!CollectionUtils.isEmpty(fields)) {
 			for (ModelField modelField : fields) {
@@ -146,25 +146,18 @@ public class ModuleUtils implements MvcConstants {
 
 			return generate2;
 		} catch (ClassNotFoundException e) {
-			// e.printStackTrace();
 			logger.warn(e.getMessage(), e);
 		} catch (SecurityException e) {
-			// e.printStackTrace();
 			logger.warn(e.getMessage(), e);
 		} catch (NoSuchMethodException e) {
-			// e.printStackTrace();
 			logger.warn(e.getMessage(), e);
 		} catch (IllegalArgumentException e) {
-			// e.printStackTrace();
 			logger.warn(e.getMessage(), e);
 		} catch (InstantiationException e) {
-			// e.printStackTrace();
 			logger.warn(e.getMessage(), e);
 		} catch (IllegalAccessException e) {
-			// e.printStackTrace();
 			logger.warn(e.getMessage(), e);
 		} catch (InvocationTargetException e) {
-			// e.printStackTrace();
 			logger.warn(e.getMessage(), e);
 		}
 

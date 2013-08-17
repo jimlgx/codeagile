@@ -21,41 +21,42 @@ public class DefaultTemplate {
 
 	public static class ABSTRACT {
 
-		public static final String Action = "AbstractAction.ftl";
-		public static final String Dao = "AbstractDao.ftl";
-		public static final String Manager = "AbstractManager.ftl";
-		public static final String Model = "AbstractModel.ftl";
+		public static final String ACTION = "AbstractAction.ftl";
+		public static final String DAO = "AbstractDao.ftl";
+		public static final String MANAGER = "AbstractManager.ftl";
+		public static final String SERVICE = "AbstractService.ftl";
+		public static final String MODEL = "AbstractModel.ftl";
 
 	}
 
 	public static class MVC {
 
-		public static final String Action = "MVCAction.ftl";
-		public static final String Manager = "MVCManager.ftl";
-		public static final String Service = "MVCService.ftl";
-		public static final String Dao = "MVCDao.ftl";
-		public static final String Model = "MVCModel.ftl";
+		public static final String ACTION = "MVCAction.ftl";
+		public static final String MANAGER = "MVCManager.ftl";
+		public static final String SERVICE = "MVCService.ftl";
+		public static final String DAO = "MVCDao.ftl";
+		public static final String MODEL = "MVCModel.ftl";
 
 	}
 
 	public static class PAGE {
 
-		public static final String editNew = "editNew.html";
-		public static final String edit = "edit.html";
-		public static final String index = "index.html";
-		public static final String list = "list.html";
-		public static final String page = "page.html";
-		public static final String search = "search.html";
+		public static final String EDIT_NEW = "editNew.html";
+		public static final String EDIT = "edit.html";
+		public static final String INDEX = "index.html";
+		public static final String LIST = "list.html";
+		public static final String PAGE = "page.html";
+		public static final String SEARCH = "search.html";
 
 	}
 
 	public static class TESTCASE {
 
-		public static final String TemplateCommon = "TemplateCommon.ftl";
-		public static final String TemplateJunitTest = "TemplateJunitTest.ftl";
-		public static final String TemplateSpringTest = "TemplateSpringTest.ftl";
-		public static final String TemplateStruts2Test = "TemplateStruts2Test.ftl";
-		public static final String TemplateSuiteTests = "TemplateSuiteTests.ftl";
+		public static final String TEMPLATE_COMMON = "TemplateCommon.ftl";
+		public static final String TEMPLATE_JUNIT_TEST = "TemplateJunitTest.ftl";
+		public static final String TEMPLATE_SPRING_TEST = "TemplateSpringTest.ftl";
+		public static final String TEMPLATE_STRUTS2_TEST = "TemplateStruts2Test.ftl";
+		public static final String TEMPLATE_SUITE_TESTS = "TemplateSuiteTests.ftl";
 	}
 
 	/**
@@ -68,10 +69,10 @@ public class DefaultTemplate {
 	 * @since 1.0 2013-7-29
 	 */
 	public static class PROPERTIES {
-		public static final String application = "application.properties";
-		public static final String jdbc = "jdbc.properties";
-		public static final String log4j = "log4j.properties";
-		public static final String field = "field.properties";
+		public static final String APPLICATION = "application.properties";
+		public static final String JDBC = "jdbc.properties";
+		public static final String LOG4J = "log4j.properties";
+		public static final String FIELD = "field.properties";
 
 	}
 

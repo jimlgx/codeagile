@@ -99,7 +99,7 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 
 			if (MVC_MODEL.equals(key)) {
 				JavaDomainFile javaDomainFile = buildJavaFile(
-						domainModel.getCode(), DefaultTemplate.MVC.Model,
+						domainModel.getCode(), DefaultTemplate.MVC.MODEL,
 						domainModel, pFolder);
 
 				PropertiesFile propertiesFile = ModuleUtils
@@ -113,25 +113,25 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 
 			} else if (MVC_DAO.equals(key)) {
 				JavaDomainFile javaDomainFile = buildJavaFile(
-						domainModel.getCode() + "Dao", DefaultTemplate.MVC.Dao,
+						domainModel.getCode() + "Dao", DefaultTemplate.MVC.DAO,
 						domainModel, pFolder);
 				setExtendsClassifNull(javaDomainFile, "EntityDaoSupport");
 
 			} else if (MVC_SERVICE.equals(key)) {
 				JavaDomainFile javaDomainFile = buildJavaFile(
 						domainModel.getCode() + "Service",
-						DefaultTemplate.MVC.Service, domainModel, pFolder);
+						DefaultTemplate.MVC.SERVICE, domainModel, pFolder);
 				setExtendsClassifNull(javaDomainFile, "EntityManagerSupport");
 			} else if (MVC_WEB.equals(key)) {
 				JavaDomainFile javaDomainFile = buildJavaFile(
 						domainModel.getCode() + "Action",
-						DefaultTemplate.MVC.Action, domainModel, pFolder);
+						DefaultTemplate.MVC.ACTION, domainModel, pFolder);
 				setExtendsClassifNull(javaDomainFile, "JsonEntityActionSupport");
 			} else if (MVC_MANAGER.equals(key)) {
 
 				JavaDomainFile javaDomainFile = buildJavaFile(
 						domainModel.getCode() + "Manager",
-						DefaultTemplate.MVC.Manager, domainModel, pFolder);
+						DefaultTemplate.MVC.MANAGER, domainModel, pFolder);
 				setExtendsClassifNull(javaDomainFile, "EntityManagerSupport");
 			}
 
@@ -172,31 +172,31 @@ public class DomainGenerateMVC extends DomainGenerateSupport implements
 			if (MVC_MODEL.equals(key)) {
 				javaTestFile = buildJavaTestFile(
 						domainModel.getCode() + "Test",
-						DefaultTemplate.TESTCASE.TemplateSpringTest,
+						DefaultTemplate.TESTCASE.TEMPLATE_SPRING_TEST,
 						domainModel, pFolder);
 				javaTestFile.setTestClass(domainModel.getCode());
 			} else if (MVC_DAO.equals(key)) {
 				javaTestFile = buildJavaTestFile(domainModel.getCode()
 						+ "DaoTest",
-						DefaultTemplate.TESTCASE.TemplateSpringTest,
+						DefaultTemplate.TESTCASE.TEMPLATE_SPRING_TEST,
 						domainModel, pFolder);
 				javaTestFile.setTestClass(domainModel.getCode() + "Dao");
 			} else if (MVC_SERVICE.equals(key)) {
 				javaTestFile = buildJavaTestFile(domainModel.getCode()
 						+ "ServiceTest",
-						DefaultTemplate.TESTCASE.TemplateSpringTest,
+						DefaultTemplate.TESTCASE.TEMPLATE_SPRING_TEST,
 						domainModel, pFolder);
 				javaTestFile.setTestClass(domainModel.getCode() + "Service");
 			} else if (MVC_WEB.equals(key)) {
 				javaTestFile = buildJavaTestFile(domainModel.getCode()
 						+ "ActionTest",
-						DefaultTemplate.TESTCASE.TemplateSpringTest,
+						DefaultTemplate.TESTCASE.TEMPLATE_SPRING_TEST,
 						domainModel, pFolder);
 				javaTestFile.setTestClass(domainModel.getCode() + "Action");
 			} else if (MVC_MANAGER.equals(key)) {
 				javaTestFile = buildJavaTestFile(domainModel.getCode()
 						+ "ManagerTest",
-						DefaultTemplate.TESTCASE.TemplateSpringTest,
+						DefaultTemplate.TESTCASE.TEMPLATE_SPRING_TEST,
 						domainModel, pFolder);
 				
 				javaTestFile.setTestClass(domainModel.getCode() + "Manager");
